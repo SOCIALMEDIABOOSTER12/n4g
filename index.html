@@ -5,163 +5,148 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>SMM Panel — Instagram / YouTube / Facebook</title>
   <style>
-    body{
-      margin:0;
-      font-family:Arial,Helvetica,sans-serif;
-      background:linear-gradient(135deg,#ff9a9e,#fad0c4,#fad0c4,#fbc2eb,#a6c1ee);
-      background-size:400% 400%;
-      animation:gradient 15s ease infinite;
-    }
-    @keyframes gradient {
-      0%{background-position:0% 50%}
-      50%{background-position:100% 50%}
-      100%{background-position:0% 50%}
-    }
-    .container{padding:20px;max-width:1000px;margin:auto;}
-    h1{text-align:center;color:#222;margin-bottom:30px;}
-    .platform-box{background:#fff;border-radius:20px;padding:20px;margin-bottom:20px;box-shadow:0 4px 10px rgba(0,0,0,0.1);}
-    .platform-header{display:flex;align-items:center;margin-bottom:15px;}
-    .platform-header img{width:30px;height:30px;margin-right:10px;}
-    .services{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:15px;}
-    .card{background:#f9f9f9;padding:15px;border-radius:15px;text-align:center;box-shadow:0 2px 5px rgba(0,0,0,0.08);}
-    .card h3{margin:0 0 10px;font-size:16px;}
-    .card p{margin:0 0 10px;color:#555;}
-    .btn{background:#0b84ff;color:#fff;padding:8px 15px;border:none;border-radius:8px;cursor:pointer;transition:0.3s;}
-    .btn:hover{background:#095ec4;}
-    .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);align-items:center;justify-content:center;}
-    .modal-content{background:#fff;padding:20px;border-radius:15px;max-width:400px;width:100%;text-align:center;}
-    .close{float:right;font-size:18px;cursor:pointer;}
-    input{padding:8px;width:90%;margin:8px 0;border:1px solid #ccc;border-radius:6px;}
-    #toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#333;color:#fff;padding:10px 20px;border-radius:20px;display:none;}
+    body{margin:0;font-family:Inter,Arial,sans-serif;background:linear-gradient(135deg,#ff9a9e,#fad0c4,#fad0c4,#fbc2eb,#a18cd1);min-height:100vh;overflow-x:hidden}
+    h1{text-align:center;color:#fff;padding:20px 10px;text-shadow:1px 1px 3px rgba(0,0,0,.4)}
+    .platform-box{background:#fff;border-radius:20px;box-shadow:0 4px 12px rgba(0,0,0,.2);margin:20px;padding:20px}
+    .platform-title{display:flex;align-items:center;font-size:1.4em;font-weight:bold;margin-bottom:15px}
+    .platform-title img{width:28px;height:28px;margin-right:10px}
+    .service{display:flex;justify-content:space-between;align-items:center;background:#f9f9f9;border-radius:12px;padding:12px 16px;margin:8px 0;box-shadow:0 2px 6px rgba(0,0,0,.1)}
+    .service span{font-size:1em;font-weight:500;color:#333}
+    button{background:#0b84ff;color:#fff;border:none;border-radius:12px;padding:8px 14px;cursor:pointer;font-weight:600;transition:background .2s}
+    button:hover{background:#0969c7}
+    .modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);display:none;justify-content:center;align-items:center;z-index:1000}
+    .modal-content{background:#fff;border-radius:16px;padding:20px;max-width:400px;width:90%;text-align:center;box-shadow:0 4px 15px rgba(0,0,0,.3)}
+    .modal-content h2{margin-top:0;font-size:1.3em;color:#222}
+    .input-field{margin:12px 0}
+    .input-field input{width:100%;padding:10px;border-radius:10px;border:1px solid #ccc}
+    .qr-code{margin:20px 0}
+    .close-btn{margin-top:15px;background:#ccc;color:#333}
+    .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#333;color:#fff;padding:10px 20px;border-radius:20px;display:none}
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>🚀 Social Media Booster Panel</h1>
+  <h1>🚀 Social Media Booster Panel</h1>
 
-    <!-- Instagram Box -->
-    <div class="platform-box">
-      <div class="platform-header">
-        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
-        <h2>Instagram Services</h2>
-      </div>
-      <div class="services">
-        <div class="card"><h3>Followers</h3><p>₹49</p><button class="btn" onclick="openVerify('Instagram Followers',49,true)">Buy</button></div>
-        <div class="card"><h3>Likes</h3><p>₹39</p><button class="btn" onclick="openVerify('Instagram Likes',39,true)">Buy</button></div>
-        <div class="card"><h3>Reels</h3><p>₹59</p><button class="btn" onclick="openVerify('Instagram Reels',59,false,true)">Buy</button></div>
-      </div>
-    </div>
+  <div id="services"></div>
 
-    <!-- YouTube Box -->
-    <div class="platform-box">
-      <div class="platform-header">
-        <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube">
-        <h2>YouTube Services</h2>
-      </div>
-      <div class="services">
-        <div class="card"><h3>Subscribers</h3><p>₹99</p><button class="btn" onclick="openVerify('YouTube Subscribers',99,true)">Buy</button></div>
-        <div class="card"><h3>Video Views</h3><p>₹79</p><button class="btn" onclick="openVerify('YouTube Video Views',79,false,true)">Buy</button></div>
-        <div class="card"><h3>4000H Monetization</h3><p>₹499</p><button class="btn" onclick="openVerify('YouTube 4000H Monetization',499,true)">Buy</button></div>
-      </div>
-    </div>
-
-    <!-- Facebook Box -->
-    <div class="platform-box">
-      <div class="platform-header">
-        <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook">
-        <h2>Facebook Services</h2>
-      </div>
-      <div class="services">
-        <div class="card"><h3>Followers</h3><p>₹69</p><button class="btn" onclick="openVerify('Facebook Followers',69,true)">Buy</button></div>
-        <div class="card"><h3>Reels Views</h3><p>₹59</p><button class="btn" onclick="openVerify('Facebook Reels Views',59,false,true)">Buy</button></div>
-        <div class="card"><h3>Reels Likes</h3><p>₹39</p><button class="btn" onclick="openVerify('Facebook Reels Likes',39,true)">Buy</button></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Verify Modal -->
-  <div id="verifyModal" class="modal">
+  <!-- Username Verification Modal -->
+  <div class="modal" id="verifyModal">
     <div class="modal-content">
-      <span class="close" onclick="closeModal('verifyModal')">&times;</span>
-      <h3 id="serviceTitle"></h3>
-      <input type="text" id="usernameInput" placeholder="Enter Username">
-      <div id="urlBox" style="display:none;">
-        <input type="text" id="urlInput" placeholder="Enter URL">
-      </div>
-      <button class="btn" onclick="verifyUser()">Verify</button>
+      <h2 id="verifyTitle">Verify</h2>
+      <div class="input-field"><input type="text" id="usernameInput" placeholder="Enter username"></div>
+      <div class="input-field" id="urlBox" style="display:none;"><input type="text" id="urlInput" placeholder="Enter URL"></div>
+      <button onclick="verifyUser()">Verify</button>
+      <button class="close-btn" onclick="closeModal('verifyModal')">Cancel</button>
     </div>
   </div>
 
   <!-- QR Modal -->
-  <div id="qrModal" class="modal">
+  <div class="modal" id="qrModal">
     <div class="modal-content">
-      <span class="close" onclick="closeModal('qrModal')">&times;</span>
-      <h3 id="qrTitle"></h3>
-      <canvas id="qrCode"></canvas>
-      <br>
-      <a id="upiLink" class="btn" href="#" style="display:block;margin-top:10px;" target="_blank">💳 Open UPI App</a>
-      <button class="btn" onclick="paymentDone()" style="margin-top:10px;">I've Paid</button>
-      <button class="btn" style="background:#999;margin-top:10px;" onclick="paymentFailed()">Cancel</button>
+      <h2>Complete Payment</h2>
+      <div class="qr-code"><canvas id="qrcode"></canvas></div>
+      <a id="upiLink" target="_blank"><button>Open UPI App</button></a>
+      <button onclick="paymentNotCompleted()">I've Paid</button>
+      <button class="close-btn" onclick="closeModal('qrModal')">Cancel</button>
     </div>
   </div>
 
-  <div id="toast"></div>
+  <!-- Payment Not Completed Modal -->
+  <div class="modal" id="paymentFailModal">
+    <div class="modal-content">
+      <h2>Payment not completed ❌</h2>
+      <p>Please try again.</p>
+      <button onclick="backToQR()">Back to QR</button>
+    </div>
+  </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/qrious/dist/qrious.min.js"></script>
+  <div class="toast" id="toast">Verified successfully ✅</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
   <script>
-    let selectedService = '';
-    let selectedPrice = 0;
-    let needUsername = true;
-    let needUrl = false;
-
     const UPI_ID = 'socialmediaboosterr@axl';
     const MERCHANT_NAME = 'Social Media Booster';
+    const SERVICES = [
+      {platform:'Instagram',icon:'https://cdn-icons-png.flaticon.com/512/174/174855.png',items:[
+        {name:'Instagram Followers',price:99,type:'username'},
+        {name:'Instagram Likes',price:49,type:'username'},
+        {name:'Instagram Reels Views',price:79,type:'url'}
+      ]},
+      {platform:'YouTube',icon:'https://cdn-icons-png.flaticon.com/512/1384/1384060.png',items:[
+        {name:'YouTube Subscribers',price:199,type:'username'},
+        {name:'YouTube Video Views',price:149,type:'url'},
+        {name:'YouTube 4000H Watchtime',price:999,type:'url'}
+      ]},
+      {platform:'Facebook',icon:'https://cdn-icons-png.flaticon.com/512/733/733547.png',items:[
+        {name:'Facebook Followers',price:99,type:'username'},
+        {name:'Facebook Reels Views',price:59,type:'url'},
+        {name:'Facebook Reels Likes',price:39,type:'url'}
+      ]}
+    ];
 
-    function openVerify(service, price, usernameNeeded, urlNeeded=false){
-      selectedService = service;
-      selectedPrice = price;
-      needUsername = usernameNeeded;
-      needUrl = urlNeeded;
-      document.getElementById('serviceTitle').innerText = `Verify for ${service}`;
-      document.getElementById('usernameInput').style.display = usernameNeeded ? 'block' : 'none';
-      document.getElementById('urlBox').style.display = urlNeeded ? 'block' : 'none';
-      document.getElementById('verifyModal').style.display = 'flex';
+    let currentService = null;
+
+    function renderServices(){
+      const container=document.getElementById('services');
+      SERVICES.forEach(group=>{
+        const box=document.createElement('div');
+        box.className='platform-box';
+        box.innerHTML=`<div class='platform-title'><img src="${group.icon}"/> ${group.platform}</div>`;
+        group.items.forEach(s=>{
+          const row=document.createElement('div');
+          row.className='service';
+          row.innerHTML=`<span>${s.name} — ₹${s.price}</span><button onclick='openVerify(${JSON.stringify(s)})'>Buy</button>`;
+          box.appendChild(row);
+        });
+        container.appendChild(box);
+      });
     }
 
-    function closeModal(id){
-      document.getElementById(id).style.display='none';
+    function openVerify(service){
+      currentService=service;
+      document.getElementById('verifyTitle').innerText=`Verify ${service.name}`;
+      document.getElementById('usernameInput').value='';
+      document.getElementById('urlInput').value='';
+      document.getElementById('urlBox').style.display=service.type==='url'?'block':'none';
+      document.getElementById('verifyModal').style.display='flex';
+    }
+
+    function closeModal(id){document.getElementById(id).style.display='none'}
+
+    function showToast(msg){
+      const t=document.getElementById('toast');
+      t.innerText=msg;t.style.display='block';
+      setTimeout(()=>{t.style.display='none'},2000);
     }
 
     function verifyUser(){
-      showToast('Username verified successfully ✅');
+      const uname=document.getElementById('usernameInput').value.trim();
+      if(!uname){alert('Enter username');return;}
+      if(currentService.type==='url' && !document.getElementById('urlInput').value.trim()){alert('Enter URL');return;}
       closeModal('verifyModal');
-      openQR();
+      showToast('Verified successfully ✅');
+      setTimeout(openQR,1000);
     }
 
     function openQR(){
-      document.getElementById('qrTitle').innerText = `${selectedService} — ₹${selectedPrice}`;
-      const upiUrl = `upi://pay?pa=${UPI_ID}&pn=${MERCHANT_NAME}&am=${selectedPrice}&cu=INR`;
-      new QRious({element:document.getElementById('qrCode'),value:upiUrl,size:200});
-      document.getElementById('upiLink').href = upiUrl;
-      document.getElementById('qrModal').style.display = 'flex';
+      const amount=currentService.price;
+      const upiUrl=`upi://pay?pa=${UPI_ID}&pn=${MERCHANT_NAME}&am=${amount}&cu=INR`;
+      QRCode.toCanvas(document.getElementById('qrcode'),upiUrl,err=>{if(err)console.error(err)});
+      document.getElementById('upiLink').href=upiUrl;
+      document.getElementById('qrModal').style.display='flex';
     }
 
-    function paymentDone(){
-      showToast('Payment completed successfully 🎉');
+    function paymentNotCompleted(){
       closeModal('qrModal');
+      document.getElementById('paymentFailModal').style.display='flex';
     }
 
-    function paymentFailed(){
-      showToast('Payment not completed ❌');
-      closeModal('qrModal');
+    function backToQR(){
+      closeModal('paymentFailModal');
+      document.getElementById('qrModal').style.display='flex';
     }
 
-    function showToast(msg){
-      const toast=document.getElementById('toast');
-      toast.innerText=msg;
-      toast.style.display='block';
-      setTimeout(()=>toast.style.display='none',3000);
-    }
+    renderServices();
   </script>
 </body>
 </html>
