@@ -34,7 +34,8 @@
     <div class="modal-content">
       <h2 id="verifyTitle">Verify</h2>
       <div class="input-field"><input type="text" id="usernameInput" placeholder="Enter username"></div>
-      <div class="input-field" id="urlBox" style="display:none;"><input type="text" id="urlInput" placeholder="Enter URL"></div>
+ <div class="input-field" id="nameBox" style="display:none;"><input type="text" id="nameInput" placeholder="Enter chanel name"></div>
+      <div class="input-field" id="urlBox" style="display:none;"><input type="text" id="urlInput" placeholder="Enter Link"></div>
       <button onclick="verifyUser()">Verify</button>
       <button class="close-btn" onclick="closeModal('verifyModal')">Cancel</button>
     </div>
@@ -68,19 +69,22 @@
     const MERCHANT_NAME = 'Social Media Booster';
     const SERVICES = [
       {platform:'Instagram',icon:'https://cdn-icons-png.flaticon.com/512/174/174855.png',items:[
-        {name:'Instagram Followers',price:99,type:'username'},
-        {name:'Instagram Likes',price:49,type:'username'},
-        {name:'Instagram Reels Views',price:79,type:'url'}
+        {name:'Instagram 1.5k Followers',price:10,type:'username'},
+		{name:'Instagram 15k Followers',price:89,type:'username'},
+        {name:'Instagram 5k Likes',price:19,type:'url'},
+        {name:'Instagram 10k Reels Views',price:39,type:'url'}
       ]},
       {platform:'YouTube',icon:'https://cdn-icons-png.flaticon.com/512/1384/1384060.png',items:[
-        {name:'YouTube Subscribers',price:199,type:'username'},
-        {name:'YouTube Video Views',price:149,type:'url'},
+        {name:'YouTube 1k Subscribers',price:49,type:'name1k'},
+        {name:'YouTube Video 10k Views',price:299,type:'url'},
+		 {name:'YouTube Shorts 10k Views',price:149,type:'url'},
         {name:'YouTube 4000H Watchtime',price:999,type:'url'}
       ]},
       {platform:'Facebook',icon:'https://cdn-icons-png.flaticon.com/512/733/733547.png',items:[
-        {name:'Facebook Followers',price:99,type:'username'},
-        {name:'Facebook Reels Views',price:59,type:'url'},
-        {name:'Facebook Reels Likes',price:39,type:'url'}
+        {name:'Facebook 1k Followers',price:19,type:'username'},
+		{name:'Facebook 10k Followers',price:189,type:'username'},
+        {name:'Facebook 10k Reels Views',price:49,type:'url'},
+        {name:'Facebook 5k Reels Likes',price:29,type:'url'}
       ]}
     ];
 
@@ -150,3 +154,4 @@
   </script>
 </body>
 </html>
+
