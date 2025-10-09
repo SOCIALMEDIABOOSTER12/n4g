@@ -17,7 +17,8 @@
     .modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);display:none;justify-content:center;align-items:center;z-index:1000}
     .modal-content{background:#fff;border-radius:16px;padding:20px;max-width:400px;width:90%;text-align:center;box-shadow:0 4px 15px rgba(0,0,0,.3)}
     .modal-content h2{margin-top:0;font-size:1.3em;color:#222}
-    .input-field{margin:12px 0}
+    .input-field{margin:12px 0;text-align:left}
+    .input-field label{display:block;margin-bottom:6px;font-size:.9em;color:#444}
     .input-field input{width:100%;padding:10px;border-radius:10px;border:1px solid #ccc}
     .qr-code{margin:20px 0}
     .close-btn{margin-top:15px;background:#ccc;color:#333}
@@ -33,9 +34,10 @@
   <div class="modal" id="verifyModal">
     <div class="modal-content">
       <h2 id="verifyTitle">Verify</h2>
-      <div class="input-field"><input type="text" id="usernameInput" placeholder="Enter username"></div>
- <div class="input-field" id="nameBox" style="display:none;"><input type="text" id="nameInput" placeholder="Enter chanel name"></div>
-      <div class="input-field" id="urlBox" style="display:none;"><input type="text" id="urlInput" placeholder="Enter Link"></div>
+      <div class="input-field">
+        <label id="verifyLabel" for="verifyInput"></label>
+        <input type="text" id="verifyInput" placeholder="">
+      </div>
       <button onclick="verifyUser()">Verify</button>
       <button class="close-btn" onclick="closeModal('verifyModal')">Cancel</button>
     </div>
@@ -69,22 +71,23 @@
     const MERCHANT_NAME = 'Social Media Booster';
     const SERVICES = [
       {platform:'Instagram',icon:'https://cdn-icons-png.flaticon.com/512/174/174855.png',items:[
-        {name:'Instagram 1.5k Followers',price:10,type:'username'},
-		{name:'Instagram 15k Followers',price:89,type:'username'},
-        {name:'Instagram 5k Likes',price:19,type:'url'},
-        {name:'Instagram 10k Reels Views',price:39,type:'url'}
+        {name:'Instagram 1k Followers',price:10,verifyField:{label:'Enter Instagram username',placeholder:'@username'}},
+        {name:'Instagram 10k Followers',price:89,verifyField:{label:'Enter Instagram username',placeholder:'@username'}},
+        {name:'Instagram 5k Likes',price:19,verifyField:{label:'Enter Post/Reel link',placeholder:'Paste link here'}},
+        {name:'Instagram 10k Reels Views',price:39,verifyField:{label:'Enter Reel link',placeholder:'Paste reel link'}}
       ]},
       {platform:'YouTube',icon:'https://cdn-icons-png.flaticon.com/512/1384/1384060.png',items:[
-        {name:'YouTube 1k Subscribers',price:49,type:'name1k'},
-        {name:'YouTube Video 10k Views',price:299,type:'url'},
-		 {name:'YouTube Shorts 10k Views',price:149,type:'url'},
-        {name:'YouTube 4000H Watchtime',price:999,type:'url'}
+        {name:'YouTube 1k Subscribers',price:49,verifyField:{label:'Enter Channel name',placeholder:'Channel name'}},
+        {name:'YouTube 10k Subscribers',price:449,verifyField:{label:'Enter Channel URL',placeholder:'Paste channel URL'}},
+        {name:'YouTube 5k Video Views',price:299,verifyField:{label:'Enter Video URL',placeholder:'Paste video link'}},
+        {name:'YouTube 10k Shorts Views',price:149,verifyField:{label:'Enter Shorts link',placeholder:'Paste shorts link'}},
+        {name:'YouTube 4000H Watchtime',price:999,verifyField:{label:'Enter Channel URL',placeholder:'Paste channel URL'}}
       ]},
       {platform:'Facebook',icon:'https://cdn-icons-png.flaticon.com/512/733/733547.png',items:[
-        {name:'Facebook 1k Followers',price:19,type:'username'},
-		{name:'Facebook 10k Followers',price:189,type:'username'},
-        {name:'Facebook 10k Reels Views',price:49,type:'url'},
-        {name:'Facebook 5k Reels Likes',price:29,type:'url'}
+        {name:'Facebook 1k Followers',price:19,verifyField:{label:'Enter Facebook profile/page link',placeholder:'Paste profile or page link'}},
+        {name:'Facebook 10k Followers',price:189,verifyField:{label:'Enter Facebook page/profile link',placeholder:'Paste profile/page link'}},
+        {name:'Facebook 10k Reels Views',price:49,verifyField:{label:'Enter Reel link',placeholder:'Paste reel link'}},
+        {name:'Facebook 5k Reels Likes',price:29,verifyField:{label:'Enter Reel link',placeholder:'Paste reel link'}}
       ]}
     ];
 
@@ -109,9 +112,9 @@
     function openVerify(service){
       currentService=service;
       document.getElementById('verifyTitle').innerText=`Verify ${service.name}`;
-      document.getElementById('usernameInput').value='';
-      document.getElementById('urlInput').value='';
-      document.getElementById('urlBox').style.display=service.type==='url'?'block':'none';
+      document.getElementById('verifyLabel').innerText=service.verifyField.label;
+      document.getElementById('verifyInput').placeholder=service.verifyField.placeholder;
+      document.getElementById('verifyInput').value='';
       document.getElementById('verifyModal').style.display='flex';
     }
 
@@ -124,9 +127,8 @@
     }
 
     function verifyUser(){
-      const uname=document.getElementById('usernameInput').value.trim();
-      if(!uname){alert('Enter username');return;}
-      if(currentService.type==='url' && !document.getElementById('urlInput').value.trim()){alert('Enter URL');return;}
+      const input=document.getElementById('verifyInput').value.trim();
+      if(!input){alert('Please fill the required field');return;}
       closeModal('verifyModal');
       showToast('Verified successfully ✅');
       setTimeout(openQR,1000);
@@ -154,4 +156,3 @@
   </script>
 </body>
 </html>
-
