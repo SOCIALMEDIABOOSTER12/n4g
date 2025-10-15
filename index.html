@@ -50,7 +50,13 @@
     <div class="modal-content" style="align-items:center;">
       <h2>QR Scan Payment</h2>
       <div class="payment-logos" style="display:flex;justify-content:center;flex-wrap:wrap;">
-       
+        <img src="https://img.icons8.com/color/48/000000/phonepe.png" width="36" title="PhonePe"/>
+        <img src="https://img.icons8.com/color/48/000000/paytm.png" width="36" title="Paytm"/>
+        <img src="https://img.icons8.com/color/48/000000/google-pay-india.png" width="36" title="GPay"/>
+        <img src="https://img.icons8.com/color/48/000000/fampay.png" width="36" title="FamPay"/>
+        <img src="https://img.icons8.com/color/48/000000/bhim.png" width="36" title="BHIM"/>
+        <img src="https://img.icons8.com/color/48/000000/navi.png" width="36" title="Navi UPI"/>
+        <img src="https://img.icons8.com/color/48/000000/upibank.png" width="36" title="Pop UPI"/>
       </div>
       <div class="qr-code"><canvas id="qrcode" style="width:220px;height:220px;"></canvas></div>
       <div id="amountDisplay" style="font-size:1.6em;font-weight:bold;margin:10px 0;"></div>
@@ -91,6 +97,8 @@
   <script>
     const UPI_ID = 'socialmediaboosterr@axl';
     const MERCHANT_NAME = 'Social Media Booster';
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyPaBG91GTphjw1821r7rUJ6aFVsWuOYltGmBU-6aYMJK7eqcMAZh_XGroWqlQn4aVl/exec';
+
     const SERVICES = [
       {platform:'Instagram',icon:'https://cdn-icons-png.flaticon.com/512/174/174855.png',items:[
         {name:'Instagram 1k Followers',price:10,verifyField:{label:'Enter Instagram username',placeholder:'@username'}},
@@ -114,7 +122,7 @@
     ];
 
     let currentService = null;
-    let qrTimer = 300; // 5 minutes in seconds
+    let qrTimer = 300;
     let countdownInterval;
 
     function renderServices(){
@@ -162,7 +170,9 @@
       const amount=currentService.price;
       document.getElementById('amountDisplay').innerText=`Amount ₹${amount}`;
       const upiUrl=`upi://pay?pa=${UPI_ID}&pn=${MERCHANT_NAME}&am=${amount}&cu=INR`;
-      QRCode.toCanvas(document.getElementById('qrcode'),upiUrl,err=>{if(err)console.error(err)});
+      const canvas = document.getElementById('qrcode');
+      canvas.getContext('2d').clearRect(0,0,canvas.width,canvas.height);
+      QRCode.toCanvas(canvas,upiUrl,err=>{if(err)console.error(err)});
       document.getElementById('qrModal').style.display='flex';
       qrTimer = 300;
       document.getElementById('qrExpiredMsg').style.display='none';
@@ -175,11 +185,11 @@
       countdownInterval = setInterval(()=>{
         qrTimer--;
         const min = Math.floor(qrTimer/60);
-        const sec = qrTimer%60;
-        document.getElementById('countdown').innerText=`⏱️ ${min}:${sec<10?'0':''}${sec}`;
-        if(qrTimer<=0){
+        const sec = qrTimer % 60;
+        document.getElementById('countdown').innerText = `⏱️ ${min}:${sec<10?'0':''}${sec}`;
+        if(qrTimer <= 0){
           clearInterval(countdownInterval);
-          document.getElementById('countdown').innerText='⏱️ 0:00';
+          document.getElementById('countdown').innerText = `⏱️ 0:00`;
           document.getElementById('qrExpiredMsg').style.display='block';
           document.getElementById('reloadQRBtn').style.display='block';
         }
@@ -192,26 +202,51 @@
 
     function openUTRModal(){
       closeModal('qrModal');
-      document.getElementById('utrInput').value='';
+      document.getElementById('utrInput').value = '';
       document.getElementById('utrModal').style.display='flex';
     }
 
     function verifyUTR(){
       const utr = document.getElementById('utrInput').value.trim().toUpperCase();
       let app = null;
-
-      if(/^T\d{12,14}$/.test(utr)) app='PhonePe';
-      else if(/^(OK|UTR)\w{8,}$/.test(utr)) app='Google Pay';
-      else if(/^(PTM|PAYTM)\d{10,}$/.test(utr)) app='Paytm';
-      else if(/^(FAM|FMPI)\d{6,}$/.test(utr)) app='FamPay';
-      else if(/^UPI\d{6,}$/.test(utr)) app='BHIM UPI';
-      else if(/^NAV\d{6,}$/.test(utr)) app='Navi UPI';
-      else if(/^POP\d{6,}$/.test(utr)) app='Pop UPI';
+      if(/^T\d{12,14}$/.test(utr)) app = 'PhonePe';
+      else if(/^(OK|UTR)\w{8,}$/.test(utr)) app = 'Google Pay';
+      else if(/^(PTM|PAYTM)\d{10,}$/.test(utr)) app = 'Paytm';
+      else if(/^(FAM|FMPI)\d{6,}$/.test(utr)) app = 'FamPay';
+      else if(/^UPI\d{6,}$/.test(utr)) app = 'BHIM UPI';
+      else if(/^NAV\d{6,}$/.test(utr)) app = 'Navi UPI';
+      else if(/^POP\d{6,}$/.test(utr)) app = 'Pop UPI';
 
       if(app){
         closeModal('utrModal');
-        document.getElementById('successInfo').innerHTML=`Service: ${currentService.name}<br>Input: ${document.getElementById('verifyInput').value}<br>Paid via: ${app}<br>Your service will be provided soon!`;
-        document.getElementById('paymentSuccessModal').style.display='flex';
+        // Send to Google Sheets
+        fetch(GOOGLE_SCRIPT_URL, {
+          method: 'POST',
+          body: JSON.stringify({
+            service: currentService.name,
+            username: document.getElementById('verifyInput').value.trim(),
+            price: currentService.price,
+            utr: utr,
+            app: app
+          })
+        }).then(_=> {
+          // Show success popup
+          document.getElementById('successInfo').innerHTML = 
+            `Service: ${currentService.name}<br>` +
+            `Your input: ${document.getElementById('verifyInput').value.trim()}<br>` +
+            `Paid via: ${app}<br>` +
+            `Your service will be provided soon.`;
+          document.getElementById('paymentSuccessModal').style.display = 'flex';
+        }).catch(err=>{
+          console.error('Google Sheet logging error:', err);
+          // Still show success popup even if logging fails
+          document.getElementById('successInfo').innerHTML = 
+            `Service: ${currentService.name}<br>` +
+            `Your input: ${document.getElementById('verifyInput').value.trim()}<br>` +
+            `Paid via: ${app}<br>` +
+            `Your service will be provided soon.`;
+          document.getElementById('paymentSuccessModal').style.display = 'flex';
+        });
       } else {
         alert('⚠️ Invalid UTR. Please check and try again.');
       }
