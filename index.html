@@ -10,95 +10,23 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@800&family=Poppins:wght@400;600&display=swap');
 body {
-  font-family: 'Poppins', sans-serif;
-   background: linear-gradient(90deg, #ffb6c1, #fcbad3, #ff9a9e);
-  background-size: 300% 300%;
-  animation: pinkDarkFlow 4s ease infinite;
-  color: #fff;
-  min-height: 100vh;
-}
-@keyframes pinkDarkFlow {
-  0% { background-position: 0% 25%; }
-  25% { background-position: 100% 70%; }
-  50% { background-position: 80% 100%; }
-  75% { background-position: 10% 80%; }
-  100% { background-position: 0% 25%; }
-}
-.promo-popup {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(38,5,33,0.16);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 20000;
-  animation: fadeinPromo 0.5s;
+  background: linear-gradient(180deg, #742dff 0%, #a023ff 35%, #bc21ff 60%, #d32ba1 100%);
+  background-size: 100% 300%;
+  animation: gradientMove 4s ease-in-out infinite;
 }
 
-@keyframes fadeinPromo {
-  from {opacity: 0;}
-  to {opacity: 1;}
-}
-
-.promo-popup-box {
-  background: linear-gradient(120deg,#fff0fa 0%, #ffd4ec 100%);
-  border-radius: 22px;
-  padding: 35px 26px 28px 26px;
-  max-width: 95vw;
-  width: 370px;
-  text-align: center;
-  box-shadow: 0 14px 42px #ec53a979, 0 2px 8px #ffb6c17c;
-  position: relative;
-  animation: popBanner 0.7s cubic-bezier(.62,2,.23,.92);
-}
-
-.close-promo {
-  position: absolute;
-  top: 8px;
-  right: 18px;
-  font-size: 2.1rem;
-  color: #e24090;
-  cursor: pointer;
-  font-weight: 700;
-  transition: color .19s;
-  z-index: 1;
-}
-.close-promo:hover { color: #881864; }
-
-.promo-deal-icon {
-  font-size: 2.9em;
-  animation: tada 2.2s infinite;
-}
-
-.promo-popup-box h3 {
-  font-family: 'Montserrat',sans-serif;
-  background: linear-gradient(90deg,#ec53a9,#ff7cb0);
-  color: transparent;
-  -webkit-background-clip: text;
-  background-clip: text;
-  font-size: 2.07rem;
-  font-weight: 900;
-  margin-bottom: 8px;
-  margin-top: 9px;
-  letter-spacing: .5px;
-}
-
-.promo-desc {
-  font-family: 'Poppins',sans-serif;
-  font-size: 1.12rem;
-  color: #ad1773;
-  margin-top: 7px;
-  font-weight: 500;
+@keyframes gradientMove {
+  0% { background-position: 0% 0%; }
+  50% { background-position: 0% 100%; }
+  100% { background-position: 0% 0%; }
 }
 
 header {
   text-align: center;
   padding: 70px 20px 50px;
-   background: linear-gradient(90deg, #ffb6c1, #fcbad3, #ff9a9e);
-  background-size: 300% 300%;
-    animation: pinkDarkFlow 4s ease infinite;
+  background: none
+  background-size: 350% 350%;
+  
   border-radius: 0 0 40px 40px;
   box-shadow: 0 0 30px rgba(255, 105, 180, 0.35);
 }
@@ -126,19 +54,27 @@ header {
   font-family: 'Montserrat', sans-serif;
   font-weight: 800;
   letter-spacing: 0.02em;
-  font-size: clamp(2rem, 6vw, 2.7rem);
-  color: #f236a1;
-  margin-bottom: .6rem;
+  font-size: clamp(2rem, 6vw, 4rem); /* medium */
+  margin-bottom: 1rem;
   line-height: 1.08;
-  background: linear-gradient(90deg, #f236a1, #ea63d8 65%, #ff78b6);
-  background-clip: text;
-  -webkit-background-clip: text;
+  background: linear-gradient(90deg, #ffb6c1, #fcbad3, #ff9a9e, #ffb6c1);
+  background-size: 250% 100%;
+  background-position: 0% 50%;
   color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-align: center;
-  text-shadow: 0 2px 12px #ffd1eb33;
-  white-space: normal;
+  text-shadow: 0 6px 24px #ff7faf65;
+  animation: pinkHeaderAnim 5s ease-in-out infinite;
 }
+
+
+@keyframes shineBlue {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 .header-tagline {
   font-family: 'Poppins', sans-serif;
   margin-top: 5px;
@@ -233,7 +169,6 @@ header {
 #priceBox {
   color: #89125a !important;
 }
-/* ==================== */
 
 .service-box {
   background: rgba(255, 255, 255, 0.93);
@@ -245,6 +180,135 @@ header {
   transition: transform 0.3s ease;
 }
 .service-box:hover { transform: translateY(-4px); }
+
+.discount-banner {
+  background: linear-gradient(90deg, #e24090 30%, #ff7cb0 100%);
+  color: #fff;
+  border-radius: 14px;
+  padding: 18px 20px;
+  margin-bottom: 18px;
+  box-shadow: 0 6px 18px -2px #ec53a966;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.09rem;
+  animation: popBanner 0.6s cubic-bezier(.62,2,.23,.92);
+  text-align: left;
+  font-weight: 500;
+}
+.discount-icon {
+  font-size: 1.8em;
+  animation: tada 1.3s infinite;
+}
+@keyframes tada {
+  0%,100% { transform: scale(1);}
+  10%,30%,50%,70%,90% { transform: scale(1.1) rotate(-5deg);}
+  20%,40%,60%,80% { transform: scale(1.1) rotate(5deg);}
+}
+@keyframes popBanner {
+  from { opacity: 0; transform: translateY(-28px) scale(.97);}
+  to   { opacity: 1; transform: translateY(0) scale(1);}
+}
+
+/* Promo main popup */
+.promo-popup {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(38,5,33,0.16);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20000;
+  animation: fadeinPromo 0.5s;
+}
+@keyframes fadeinPromo {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+.promo-popup-box {
+  background: linear-gradient(120deg,#fff0fa 0%, #ffd4ec 100%);
+  border-radius: 22px;
+  padding: 35px 26px 28px 26px;
+  max-width: 95vw;
+  width: 370px;
+  text-align: center;
+  box-shadow: 0 14px 42px #ec53a979, 0 2px 8px #ffb6c17c;
+  position: relative;
+  animation: popBanner 0.7s cubic-bezier(.62,2,.23,.92);
+}
+.close-promo {
+  position: absolute;
+  top: 8px;
+  right: 18px;
+  font-size: 2.1rem;
+  color: #e24090;
+  cursor: pointer;
+  font-weight: 700;
+  transition: color .19s;
+  z-index: 1;
+}
+.close-promo:hover { color: #881864; }
+.promo-deal-icon {
+  font-size: 2.9em;
+  animation: tada 2.2s infinite;
+}
+.promo-popup-box h3 {
+  font-family: 'Montserrat',sans-serif;
+  background: linear-gradient(90deg,#ec53a9,#ff7cb0);
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-size: 2.07rem;
+  font-weight: 900;
+  margin-bottom: 8px;
+  margin-top: 9px;
+  letter-spacing: .5px;
+}
+.promo-desc {
+  font-family: 'Poppins',sans-serif;
+  font-size: 1.12rem;
+  color: #ad1773;
+  margin-top: 7px;
+  font-weight: 500;
+}
+
+/* UTR POPUP MODAL */
+.utr-popup {
+  position: fixed;
+  top:0; left:0; width:100vw; height:100vh;
+  background: rgba(0,0,0,0.45);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index: 10000;
+}
+.utr-popup-box {
+  background: #fff;
+  color: #e24090;
+  padding: 25px 30px;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.25);
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.17rem;
+  max-width: 90vw;
+  width: 320px;
+}
+.utr-popup-box button {
+  margin-top: 20px;
+  padding: 8px 24px;
+  font-weight: 600;
+  background: #e24090;
+  color: white;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: background 0.25s;
+}
+.utr-popup-box button:hover {
+  background: #b61c68;
+}
+
 button.btn {
   background: linear-gradient(45deg, #ff9a9e, #ffb6c1);
   border: none;
@@ -278,35 +342,40 @@ button.btn:hover {
   z-index: 1600;
   width: 350px;
 }
-.about-section {
+ .about-section {
   padding: 80px 20px 60px;
-   animation: pinkDarkFlow 4s ease infinite;
-  color: #fff;
+  background: none
+  
+    color: #333;
   position: relative;
   overflow: hidden;
 }
+
 .about-box {
-  background: rgba(255, 255, 255, 0.90);
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(10px);
   padding: 40px 30px;
   border-radius: 18px;
-  box-shadow: 0 8px 25px rgba(255, 105, 180, 0.17);
+  box-shadow: 0 8px 25px rgba(255, 105, 180, 0.3);
   max-width: 800px;
   margin: auto;
   animation: fadeUp 1.5s ease-in-out;
 }
+
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
 .about-title {
   font-family: 'Montserrat', sans-serif;
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 800;
   color: #e75480;
   margin-bottom: 20px;
   text-transform: uppercase;
 }
+
 .about-title span {
   color: #ff1493;
   background: linear-gradient(90deg, #ff1493, #ff7eb9, #ffc1e3);
@@ -315,28 +384,34 @@ button.btn:hover {
   animation: gradientFlow 6s ease infinite;
   background-size: 300%;
 }
+
 @keyframes gradientFlow {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
+
 .about-text {
   font-family: 'Poppins', sans-serif;
   font-size: 1.05rem;
-  color: #222;
+  color: #444;
   margin-bottom: 15px;
   line-height: 1.7;
 }
+
 .highlight-number {
   color: #d63384;
   font-weight: 700;
 }
+
+/* Instagram link style */
 .insta-box img {
   width: 28px;
   height: 28px;
   margin-right: 8px;
   vertical-align: middle;
 }
+
 .insta-link {
   display: inline-flex;
   align-items: center;
@@ -351,17 +426,20 @@ button.btn:hover {
   transition: all 0.3s ease-in-out;
   box-shadow: 0 4px 15px rgba(255, 20, 147, 0.4);
 }
+
 .insta-link:hover {
   transform: scale(1.05);
   box-shadow: 0 6px 20px rgba(255, 20, 147, 0.6);
 }
 </style>
 </head>
-<!-- Big 20% OFF Promo Popup -->
+<body>
+
+<!-- 20% OFF Main Screen Popup -->
 <div id="mainDiscountPopup" class="promo-popup">
   <div class="promo-popup-box">
     <span class="close-promo" onclick="document.getElementById('mainDiscountPopup').style.display='none'">&times;</span>
-    <div class="promo-deal-icon mb-2">🎊</div>
+    <div class="promo-deal-icon mb-2">??</div>
     <h3>20% OFF MEGA DEAL</h3>
     <div class="promo-desc">
       Get <b>20% OFF</b> on all orders of <span style="color:#d63384;font-weight:600;">10,000+ Followers, Subscribers, or Members</span>!
@@ -370,16 +448,13 @@ button.btn:hover {
   </div>
 </div>
 
-<body>
 <header>
   <div class="header-box">
     <div class="header-icon mb-2">
-      <svg height="42" width="42" viewBox="0 0 24 24" fill="none">
-        <path fill="#f04da1" d="M16.4,10.43,18.82,2.09a.25.25,0,0,0-.33-.32L10.24,4.6a2.82,2.82,0,0,0-1,5.1l3,1A2.81,2.81,0,0,0,16.4,10.43Z"/><circle fill="#f04da1" cx="8" cy="16" r="2" />
-      </svg>
+     
     </div>
     <h1 class="header-title">SMBOOSTER<br>PANEL</h1>
-    <div class="header-tagline">World’s Fastest &amp; Cheapest<br>SMM Services</div>
+    <div class="header-tagline">World’s Fastest Cheapest<br>SMM Services</div>
   </div>
   <div class="stats-container">
     <div class="stat-card">
@@ -387,12 +462,12 @@ button.btn:hover {
       <div class="stat-label">Orders Today</div>
     </div>
     <div class="stat-card">
-      <div class="stat-number" data-target="5000">0</div>
-      <div class="stat-label">Happy Clients</div>
+      <div class="stat-number" data-target="8556">0</div>
+      <div class="stat-label">Happy Costumers</div>
     </div>
     <div class="stat-card">
       <div class="stat-number" data-target="1">0</div>
-      <div class="stat-label">#1 Cheapest Panel</div>
+      <div class="stat-label">#1st Cheapest Panel</div>
     </div>
   </div>
 </header>
@@ -406,6 +481,15 @@ button.btn:hover {
 <div id="servicesPanel">
   <div class="container">
     <div class="service-box">
+      <div id="discount-banner" class="discount-banner" style="display:none;">
+        <div class="d-flex align-items-center">
+          <span class="discount-icon me-2">??</span>
+          <span>
+            <strong>Special Offer!</strong><br>
+            <b>20% OFF</b> on 10,000+ Followers, Subscribers, or Members.
+          </span>
+        </div>
+      </div>
       <div class="mb-3">
         <label for="serviceSelect">Select Service:</label>
         <select id="serviceSelect" class="form-select"></select>
@@ -416,15 +500,15 @@ button.btn:hover {
         <label id="usernameLabel"></label>
         <input type="text" id="usernameInput" class="form-control" placeholder="" />
       </div>
-      <div class="mb-3">
+      <div class="mb-3" id="qtyGroup">
         <label for="qtyInput">Enter Quantity (Minimum 1000):</label>
         <input type="number" id="qtyInput" class="form-control" min="1000" value="1000" />
       </div>
       <div class="mb-3">
         <label>Total Price:</label>
-        <input type="text" id="priceBox" class="form-control" readonly placeholder="₹0.00" />
+        <input type="text" id="priceBox" class="form-control" readonly placeholder="0.00" />
       </div>
-      <button class="btn btn-primary w-100" id="makeOrder">Make Order & Generate QR</button>
+      <button class="btn btn-primary w-100" id="makeOrder">Make Order </button>
     </div>
   </div>
 </div>
@@ -443,24 +527,35 @@ button.btn:hover {
          autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
   <button class="btn btn-success w-100 mt-3" id="verifyUtrBtn">Verify UTR</button>
 </div>
-<div id="confirmationModal">
-  <h5>Order Confirmed!</h5>
-  <p id="confServiceDetails"></p>
-  <button id="closeConfirm" class="btn btn-primary mt-3">Close</button>
+<div id="utrVerifiedPopup" class="utr-popup" style="display:none;">
+  <div class="utr-popup-box">
+    <p>UTR Verified Successfully!</p>
+    <button onclick="closeUtrPopup('utrVerifiedPopup')">OK</button>
+  </div>
 </div>
+<div id="paymentErrorPopup" class="utr-popup" style="display:none;">
+  <div class="utr-popup-box">
+    <p>Payment Not Completed! Please check your UTR number.</p>
+    <button onclick="closeUtrPopup('paymentErrorPopup')">Close</button>
+  </div>
+</div>
+
+<!-- About Us Section -->
 <section id="about" class="about-section">
   <div class="container text-center">
     <div class="about-box">
       <h2 class="about-title">About <span>SMBOOSTER</span></h2>
       <p class="about-text">
         SMBOOSTER was founded with one simple goal: to boost social media faster, affordable, 
-        and effortless. Serving thousands of happy customers worldwide, we offer authentic engagement 
+        and effortless. Serving thousands of happy costumers worldwide, we offer authentic engagement 
         across all major platforms — helping influencers, brands, and creators build real digital impact. 
       </p>
+
       <p class="about-text">
-        Trusted by over <span class="highlight-number">5000+</span> happy customers, our mission is simple — 
+        Trusted by over <span class="highlight-number">5000+</span> happy costumers, our mission is simple — 
         deliver quality, speed, and value like no one else.
       </p>
+
       <div class="insta-box mt-4">
         <a href="https://www.instagram.com/s_m_b_ooster_guru?igsh=ZzZvYjE1Nzk4ZDJn" target="_blank" class="insta-link">
           <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" />
@@ -471,6 +566,14 @@ button.btn:hover {
   </div>
 </section>
 <script>
+  // Hide main discount popup after 9 seconds
+  window.addEventListener("DOMContentLoaded", function(){
+    setTimeout(function(){
+      const popup = document.getElementById('mainDiscountPopup');
+      if(popup) popup.style.display = 'none';
+    }, 9000);
+  });
+
   // Counter Animation
   const counters = document.querySelectorAll(".stat-number");
   const speed = 100;
@@ -488,6 +591,29 @@ button.btn:hover {
     };
     animate();
   });
+
+  // UTR Popup Control
+  const verifyUtrBtn = document.getElementById("verifyUtrBtn");
+  const utrInput = document.getElementById("utrInput");
+  const utrVerifiedPopup = document.getElementById("utrVerifiedPopup");
+  const paymentErrorPopup = document.getElementById("paymentErrorPopup");
+
+  verifyUtrBtn.addEventListener("click", () => {
+    const utr = utrInput.value.trim();
+    if (!utr) {
+      alert("Please enter your UTR number.");
+      return;
+    }
+    // Always show payment error popup for demonstration
+    paymentErrorPopup.style.display = "flex";
+  });
+
+  function closeUtrPopup(id) {
+    const popup = document.getElementById(id);
+    popup.style.display = "none";
+    utrInput.focus();
+  }
+
   document.querySelectorAll('.app-btn').forEach(btn => {
     btn.addEventListener('click', function() {
       document.querySelector('.app-btn.selected')?.classList.remove('selected');
@@ -503,43 +629,44 @@ button.btn:hover {
       document.querySelector('.service-box').style.display = ""; // show by default
     });
   });
+
   document.addEventListener("DOMContentLoaded", () => {
     window.services = {
-  instagram: [
-    { name: "Followers", desc: "Get real Instagram followers instantly.", placeholder: "Enter Instagram Username", base: 10 },
-    { name: "post Likes", desc: "Instant high-quality likes for your posts.", placeholder: "Enter Post Link", base: 5 },
-    { name: "post Comments", desc: "Real and engaging comments on your post.", placeholder: "Enter post Link", base: 8 },
-    { name: "Reel Likes", desc: "Instant high-quality likes for your Reel.", placeholder: "Enter Reel Link", base: 5 },
-    { name: "Reels Views", desc: "Real organic views for your videos.", placeholder: "Enter Reel Link", base: 4 },
-    { name: "Reels Comments", desc: "Real and engaging comments on your Reels.", placeholder: "Enter ReelLink", base: 8 }
-  ],
-  youtube: [
-    { name: "Subscribers", desc: "Grow your YouTube channel subscribers fast.", placeholder: "Enter Channel Link", base: 49 },
-    { name: "4000 Hrs Watchtime", desc: "Get monitized by organic watchtime safely.", placeholder: "Enter Channel Link", base: 1199, noQty: true },
-    { name: "Shorts Views", desc: "Instant views for YouTube Shorts.", placeholder: "Enter Shorts Link", base: 8 },
-    { name: "Short Comments", desc: "Get real user comments on your videos.", placeholder: "Enter Short Link", base: 10 },
-    { name: "video Views", desc: "Instant views but views don't give Watchtime.", placeholder: "Enter video Link", base: 8 },
-    { name: "Video Comments", desc: "Get real user comments on your videos.", placeholder: "Enter Video Link", base: 10 }
-  ],
-  telegram: [
-    { name: "Members", desc: "Add Telegram members quickly.", placeholder: "Enter Group Link", base: 39 },
-    { name: "Premium Members", desc: "Add premium Telegram members quickly.", placeholder: "Enter Group Link", base: 59 },
-    { name: "Post Views", desc: "Increase Telegram post views instantly.", placeholder: "Enter Post Link", base: 4 }
-  ],
-  facebook: [
-    { name: "Followers", desc: "Grow your page followers easily.", placeholder: "Enter Page Link", base: 15 },
-    { name: "post Likes", desc: "Get page or post likes from real users.", placeholder: "Enter Post Link", base: 7 },
-    { name: "post Comments", desc: "Real and engaging comments on your post.", placeholder: "Enter post Link", base: 9 },
-    { name: "Reel Likes", desc: "Boost likes on your Facebook Reels.", placeholder: "Enter Reel Link", base: 5 },
-    { name: "Reels Views", desc: "Real organic views for your Reels.", placeholder: "Enter Reel Link", base: 4 },
-    { name: "Reels Comments", desc: "Real and engaging comments on your Facebook Reels.", placeholder: "Enter ReelLink", base: 8 }
-  ],
-  tiktok: [
-    { name: "Followers", desc: "Real and fast TikTok followers.", placeholder: "Enter TikTok Username", base: 26 },
-    { name: "Likes", desc: "High-quality likes for your TikTok videos.", placeholder: "Enter Video Link", base: 5 },
-    { name: "Comments", desc: "Engaging comments for TikTok posts.", placeholder: "Enter Video/Post Link", base: 8 },
-    { name: "Video Views", desc: "Boost your TikTok video views globally.", placeholder: "Enter Video Link", base: 3 }
-  ]
+      instagram: [
+        { name: "Followers", desc: "Get real Instagram followers instantly.", placeholder: "Enter Instagram Username", base: 10 },
+        { name: "post Likes", desc: "Instant high-quality likes for your posts.", placeholder: "Enter Post Link", base: 5 },
+        { name: "post Comments", desc: "Real and engaging comments on your post.", placeholder: "Enter post Link", base: 8 },
+        { name: "Reel Likes", desc: "Instant high-quality likes for your Reel.", placeholder: "Enter Reel Link", base: 5 },
+        { name: "Reels Views", desc: "Real organic views for your videos.", placeholder: "Enter Reel Link", base: 4 },
+        { name: "Reels Comments", desc: "Real and engaging comments on your Reels.", placeholder: "Enter ReelLink", base: 8 }
+      ],
+      youtube: [
+        { name: "Subscribers", desc: "Grow your YouTube channel subscribers fast.", placeholder: "Enter Channel Link", base: 49 },
+        { name: "4000 Hrs Watchtime", desc: "Get monitized by organic watchtime safely.", placeholder: "Enter Channel Link", base: 1199, noQty: true },
+        { name: "Shorts Views", desc: "Instant views for YouTube Shorts.", placeholder: "Enter Shorts Link", base: 8 },
+        { name: "Short Comments", desc: "Get real user comments on your videos.", placeholder: "Enter Short Link", base: 10 },
+        { name: "video Views", desc: "Instant views but views don't give Watchtime.", placeholder: "Enter video Link", base: 8 },
+        { name: "Video Comments", desc: "Get real user comments on your videos.", placeholder: "Enter Video Link", base: 10 }
+      ],
+      telegram: [
+        { name: "Members", desc: "Add Telegram members quickly.", placeholder: "Enter Group Link", base: 39 },
+        { name: "Premium Members", desc: "Add premium Telegram members quickly.", placeholder: "Enter Group Link", base: 59 },
+        { name: "Post Views", desc: "Increase Telegram post views instantly.", placeholder: "Enter Post Link", base: 4 }
+      ],
+      facebook: [
+        { name: "Followers", desc: "Grow your page followers easily.", placeholder: "Enter Page Link", base: 15 },
+        { name: "post Likes", desc: "Get page or post likes from real users.", placeholder: "Enter Post Link", base: 7 },
+        { name: "post Comments", desc: "Real and engaging comments on your post.", placeholder: "Enter post Link", base: 9 },
+        { name: "Reel Likes", desc: "Boost likes on your Facebook Reels.", placeholder: "Enter Reel Link", base: 5 },
+        { name: "Reels Views", desc: "Real organic views for your Reels.", placeholder: "Enter Reel Link", base: 4 },
+        { name: "Reels Comments", desc: "Real and engaging comments on your Facebook Reels.", placeholder: "Enter ReelLink", base: 8 }
+      ],
+      tiktok: [
+        { name: "Followers", desc: "Real and fast TikTok followers.", placeholder: "Enter TikTok Username", base: 26 },
+        { name: "Likes", desc: "High-quality likes for your TikTok videos.", placeholder: "Enter Video Link", base: 5 },
+        { name: "Comments", desc: "Engaging comments for TikTok posts.", placeholder: "Enter Video/Post Link", base: 8 },
+        { name: "Video Views", desc: "Boost your TikTok video views globally.", placeholder: "Enter Video Link", base: 3 }
+      ]
     };
     const serviceSelect = document.getElementById("serviceSelect");
     const title = document.getElementById("serviceTitle");
@@ -561,6 +688,7 @@ button.btn:hover {
     const confirmationModal = document.getElementById("confirmationModal");
     const confServiceDetails = document.getElementById("confServiceDetails");
     const closeConfirmBtn = document.getElementById("closeConfirm");
+
     window.loadServices = function(app) {
       serviceSelect.innerHTML = "";
       (services[app] || []).forEach((s, i) => {
@@ -569,125 +697,147 @@ button.btn:hover {
         option.textContent = s.name;
         serviceSelect.appendChild(option);
       });
+    };
+
+    window.setServiceInfo = function(app, idx) {
+      if (!services[app]) return;
+      const serv = services[app][idx];
+      title.textContent = `${app.charAt(0).toUpperCase() + app.slice(1)} - ${serv.name}`;
+      desc.textContent = serv.desc;
+      userLabel.textContent = serv.placeholder + ":";
+      userInput.placeholder = serv.placeholder;
+
+      if (serv.noQty) {
+        qtyInput.parentElement.style.display = "none";
+        document.querySelector('label[for="qtyInput"]').nextElementSibling.style.display = "none";
+        if (!document.getElementById("monetizationNotice")) {
+          const notice = document.createElement("div");
+          notice.id = "monetizationNotice";
+          notice.style =
+            "color:#d63384;font-weight:600;background:#f9c9ed;padding:13px 15px;margin:12px 0 0 0;border-radius:9px;";
+          notice.textContent = "Channel will be monetized in 24hrs. Quantity is handled automatically!";
+          desc.parentNode.insertBefore(notice, desc.nextSibling);
+        } else {
+          document.getElementById("monetizationNotice").style.display = "block";
+        }
+        qtyInput.value = 1;
+      } else {
+        qtyInput.parentElement.style.display = "";
+        document.querySelector('label[for="qtyInput"]').nextElementSibling.style.display = "";
+        if (document.getElementById("monetizationNotice")) {
+          document.getElementById("monetizationNotice").style.display = "none";
+        }
+        let minQty = 5000;
+        const special = ["followers", "subscribers", "members"];
+        if (special.some((type) => serv.name.toLowerCase().includes(type))) minQty = 1000;
+        qtyInput.min = minQty;
+        qtyInput.value = minQty;
+        document.querySelector('label[for="qtyInput"]').textContent = `Enter Quantity (Minimum ${minQty}):`;
+      }
+      updatePrice();
+    };
+
+    function updatePrice() {
+      const currentApp = document.querySelector('.app-btn.selected')?.getAttribute('data-app') || "instagram";
+      const idx = serviceSelect.value || 0;
+      const servs = services[currentApp];
+      if (!servs) return;
+      const serv = servs[idx];
+
+      if (serv.noQty) {
+        priceBox.value = `?${serv.base.toFixed(2)}`;
+        let banner = document.getElementById("discount-banner");
+        if (banner) banner.style.display = "none";
+        return;
+      }
+
+      const qty = Math.max(Number(qtyInput.min), parseInt(qtyInput.value) || Number(qtyInput.min));
+      let price = (qty / 1000) * serv.base;
+
+      let banner = document.getElementById("discount-banner");
+      if (
+        qty >= 10000 &&
+        ["followers", "subscribers", "members"].some((w) => serv.name.toLowerCase().includes(w))
+      ) {
+        price = price * 0.8;
+        if (banner) banner.style.display = "block";
+      } else if (banner) {
+        banner.style.display = "none";
+      }
+
+      priceBox.value = `?${price.toFixed(2)}`;
     }
-    // DYNAMIC MINIMUMS FOR SERVICE TYPE
-   window.setServiceInfo = function(app, idx) {
-  if (!services[app]) return;
-  const serv = services[app][idx];
-  title.textContent = `${app.charAt(0).toUpperCase() + app.slice(1)} - ${serv.name}`;
-  desc.textContent = serv.desc;
-  userLabel.textContent = serv.placeholder + ":";
-  userInput.placeholder = serv.placeholder;
-
-  // 4000 Hrs Watchtime (YouTube Monetization): hide Qty input, show notice
-  if (serv.noQty) {
-    qtyInput.parentElement.style.display = "none";
-    document.querySelector('label[for="qtyInput"]').nextElementSibling.style.display = "none";
-    // Show a custom message below the service description
-    if (!document.getElementById("monetizationNotice")) {
-      const notice = document.createElement("div");
-      notice.id = "monetizationNotice";
-      notice.style = "color:#d63384;font-weight:600;background:#f9c9ed;padding:13px 15px;margin:12px 0 0 0;border-radius:9px;";
-      notice.textContent = "Channel will be monetized in 24hrs. Quantity is handled automatically!";
-      desc.parentNode.insertBefore(notice, desc.nextSibling);
-    } else {
-      document.getElementById("monetizationNotice").style.display = "block";
-    }
-    qtyInput.value = 1; // To avoid 0 error in price
-  } else {
-    qtyInput.parentElement.style.display = "";
-    document.querySelector('label[for="qtyInput"]').nextElementSibling.style.display = "";
-    if (document.getElementById("monetizationNotice")) {
-      document.getElementById("monetizationNotice").style.display = "none";
-    }
-    // Set dynamic min value as before
-    let minQty = 5000;
-    const special = ["followers", "subscribers", "members"];
-    if (special.some(type => serv.name.toLowerCase().includes(type))) minQty = 1000;
-    qtyInput.min = minQty;
-    qtyInput.value = minQty;
-    document.querySelector('label[for="qtyInput"]').textContent = `Enter Quantity (Minimum ${minQty}):`;
-  }
-  updatePrice();
-}
-
-   function updatePrice() {
-  const currentApp = document.querySelector('.app-btn.selected')?.getAttribute('data-app') || 'instagram';
-  const idx = serviceSelect.value || 0;
-  const servs = services[currentApp];
-  if (!servs) return;
-  const serv = servs[idx];
-
-  // If service has noQty property (like YouTube Monetization), skip quantity
-  if (serv.noQty) {
-    priceBox.value = `₹${serv.base.toFixed(2)}`;
-    let banner = document.getElementById("discount-banner");
-    if (banner) banner.style.display = "none";
-    return;
-  }
-
-  const qty = Math.max(Number(qtyInput.min), parseInt(qtyInput.value) || Number(qtyInput.min));
-  let price = (qty / 1000) * serv.base;
-
-  // 20% off ONLY for "followers", "subscribers", "members" IF qty > 10000
-  let banner = document.getElementById("discount-banner");
-  if (
-      qty >= 10000 &&
-      ["followers", "subscribers", "members"].some(word => serv.name.toLowerCase().includes(word))
-    ) {
-    price = price * 0.8; // apply 20% off
-    if (banner) banner.style.display = "block";
-  } else {
-    if (banner) banner.style.display = "none";
-  }
-
-  priceBox.value = `₹${price.toFixed(2)}`;
-}
 
     loadServices("instagram");
     serviceSelect.value = 0;
     setServiceInfo("instagram", 0);
-    serviceSelect.addEventListener("change", function() {
-      const currentApp = document.querySelector('.app-btn.selected')?.getAttribute('data-app') || 'instagram';
+    serviceSelect.addEventListener("change", function () {
+      const currentApp = document.querySelector(".app-btn.selected")?.getAttribute("data-app") || "instagram";
       setServiceInfo(currentApp, serviceSelect.value);
     });
     qtyInput.addEventListener("input", updatePrice);
     makeOrderBtn.addEventListener("click", () => {
-      const currentApp = document.querySelector('.app-btn.selected')?.getAttribute('data-app') || 'instagram';
+      const currentApp = document.querySelector(".app-btn.selected")?.getAttribute("data-app") || "instagram";
       const idx = serviceSelect.value || 0;
       const servs = services[currentApp];
       if (!servs) return;
       const serv = servs[idx];
       const username = userInput.value.trim();
-      const qty = Math.max(Number(qtyInput.min), parseInt(qtyInput.value) || Number(qtyInput.min));
-      if (!username) { alert("Please enter required details!"); return; }
-      const price = (qty / 1000) * serv.base;
-      const upiUrl = `upi://pay?pa=pranksainiapks@fam&pn=SMBOOSTER&am=${price.toFixed(2)}&cu=INR&tn=${encodeURIComponent(serv.name + " for " + username)}`;
+      let qty = 1;
+      if (!serv.noQty) qty = Math.max(Number(qtyInput.min), parseInt(qtyInput.value) || Number(qtyInput.min));
+      let price = (qty / 1000) * serv.base;
+      if (
+        !serv.noQty &&
+        qty >= 10000 &&
+        ["followers", "subscribers", "members"].some((w) => serv.name.toLowerCase().includes(w))
+      )
+        price = price * 0.8;
+      if (!username) {
+        alert("Please enter required details!");
+        return;
+      }
+      const upiUrl = `upi://pay?pa=smsainibooster@fam&pn=SMBOOSTER&am=${price.toFixed(2)}&cu=INR&tn=${encodeURIComponent(
+        serv.name + " for " + username
+      )}`;
       qrcodeDiv.innerHTML = "";
       new QRCode(qrcodeDiv, { text: upiUrl, width: 230, height: 230, correctLevel: QRCode.CorrectLevel.H });
-      amountText.textContent = `Pay ₹${price.toFixed(2)} for ${qty} ${serv.name}`;
+      amountText.textContent = `Pay ?${price.toFixed(2)} for ${qty} ${serv.name}`;
       overlay.style.display = "block";
       qrBox.style.display = "block";
     });
-    closeQrBtn.addEventListener("click", () => { qrBox.style.display = "none"; overlay.style.display = "none"; });
-    paidBtn.addEventListener("click", () => { qrBox.style.display = "none"; utrSection.style.display = "block"; overlay.style.display = "block"; });
-    overlay.addEventListener("click", () => { utrSection.style.display = "none"; confirmationModal.style.display = "none"; overlay.style.display = "none"; });
-    verifyUtrBtn.addEventListener("click", () => {
-      utrInput.value = "";
-      const currentApp = document.querySelector('.app-btn.selected')?.getAttribute('data-app') || 'instagram';
-      const idx = serviceSelect.value || 0;
-      const serv = (services[currentApp] || [])[idx];
-      const username = userInput.value.trim();
-      confServiceDetails.textContent = serv
-        ? `Your order for '${serv.name}' (Account: ${username}) has been received and will be processed soon.`
-        : `Your order has been received and will be processed soon.`;
-      confirmationModal.style.display = "block";
-      utrSection.style.display = "none";
+    closeQrBtn.addEventListener("click", () => {
+      qrBox.style.display = "none";
+      overlay.style.display = "none";
     });
+    paidBtn.addEventListener("click", () => {
+      qrBox.style.display = "none";
+      utrSection.style.display = "block";
+      overlay.style.display = "block";
+    });
+    overlay.addEventListener("click", () => {
+      utrSection.style.display = "none";
+      confirmationModal.style.display = "none";
+      overlay.style.display = "none";
+    });
+    verifyUtrBtn.addEventListener("click", () => {
+      const utr = utrInput.value.trim();
+      if (!utr) {
+        alert("Please enter your UTR number.");
+        return;
+      }
+      paymentErrorPopup.style.display = "flex";
+    });
+    function closeUtrPopup(id) {
+      const popup = document.getElementById(id);
+      popup.style.display = "none";
+      utrInput.focus();
+    }
     closeConfirmBtn.addEventListener("click", () => {
-      confirmationModal.style.display = "none"; overlay.style.display = "none";
+      confirmationModal.style.display = "none";
+      overlay.style.display = "none";
     });
   });
+
 </script>
 </body>
 </html>
