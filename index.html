@@ -1,843 +1,264 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>SMBOOSTER - #1 Social Media Services Panel</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>SMM Panel — Instagram / YouTube / Facebook</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@800&family=Poppins:wght@400;600&display=swap');
-body {
-  background: linear-gradient(180deg, #742dff 0%, #a023ff 35%, #bc21ff 60%, #d32ba1 100%);
-  background-size: 100% 300%;
-  animation: gradientMove 4s ease-in-out infinite;
-}
-
-@keyframes gradientMove {
-  0% { background-position: 0% 0%; }
-  50% { background-position: 0% 100%; }
-  100% { background-position: 0% 0%; }
-}
-
-header {
-  text-align: center;
-  padding: 70px 20px 50px;
-  background: none
-  background-size: 350% 350%;
-  
-  border-radius: 0 0 40px 40px;
-  box-shadow: 0 0 30px rgba(255, 105, 180, 0.35);
-}
-@keyframes headerAnim {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-.header-box {
-  background: rgba(255, 255, 255, 0.13);
-  border: 2px solid #ffa4d3;
-  border-radius: 20px;
-  padding: 32px 26px;
-  margin: 0 auto 14px auto;
-  width: 100%;
-  max-width: 370px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-shadow: 0 8px 32px rgba(212, 43, 127, 0.09);
-  backdrop-filter: blur(10px);
-  word-break: keep-all;
-}
-.header-title {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 800;
-  letter-spacing: 0.02em;
-  font-size: clamp(2rem, 6vw, 4rem); /* medium */
-  margin-bottom: 1rem;
-  line-height: 1.08;
-  background: linear-gradient(90deg, #ffb6c1, #fcbad3, #ff9a9e, #ffb6c1);
-  background-size: 250% 100%;
-  background-position: 0% 50%;
-  color: transparent;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 0 6px 24px #ff7faf65;
-  animation: pinkHeaderAnim 5s ease-in-out infinite;
-}
-
-
-@keyframes shineBlue {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-.header-tagline {
-  font-family: 'Poppins', sans-serif;
-  margin-top: 5px;
-  font-size: 1.17rem;
-  font-weight: 500;
-  color: #fff;
-  text-shadow: 0 1px 8px #b8227740;
-  line-height: 1.4;
-}
-.header-icon { text-align: center; }
-.app-bar {
-  flex-wrap: wrap;
-  gap: 16px;
-  margin-bottom: 25px;
-  justify-content: center;
-  display: flex;
-}
-.app-btn {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 500;
-  font-size: 1rem;
-  padding: 10px 22px;
-  border-radius: 12px;
-  border: 2px solid #ffe0ef;
-  background: #fff;
-  color: #d63384;
-  cursor: pointer;
-  transition: all 0.17s;
-  box-shadow: 0 2px 8px rgba(255, 105, 180, 0.07);
-}
-.app-btn.selected,
-.app-btn:hover {
-  background: linear-gradient(90deg, #ffb6c1, #ffc6e0);
-  color: #fff !important;
-  border: 2px solid #ff74b7;
-  box-shadow: 0 4px 16px rgba(255, 105, 180, .16);
-}
-.app-btn img, .app-btn i {
-  width: 22px; height: 22px;
-  object-fit: contain;
-}
-.stats-container {
-  margin-top: 30px;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-.stat-card {
-  background: rgba(255,255,255,0.85);
-  backdrop-filter: blur(12px);
-  border-radius: 12px;
-  padding: 20px 30px;
-  text-align: center;
-  box-shadow: 0 4px 20px rgba(255, 182, 193, 0.3);
-  width: 200px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.stat-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(255, 192, 203, 0.5);
-}
-.stat-number {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #e75480;
-}
-.stat-label {
-  font-size: 1rem;
-  color: #555;
-}
-
-/* ==== SERVICE BOX DARK TEXT FIX ===== */
-.service-box,
-.service-box label,
-.service-box h5,
-.service-box p,
-.service-box input,
-.service-box select {
-  color: #2d0a24 !important;
-  background: none;
-}
-.service-box input::placeholder,
-.service-box select,
-.service-box textarea::placeholder {
-  color: #a16a96 !important;
-  opacity: 1;
-}
-#priceBox {
-  color: #89125a !important;
-}
-
-.service-box {
-  background: rgba(255, 255, 255, 0.93);
-  backdrop-filter: blur(12px);
-  padding: 25px;
-  margin-top: 30px;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(255, 182, 193, 0.3);
-  transition: transform 0.3s ease;
-}
-.service-box:hover { transform: translateY(-4px); }
-
-.discount-banner {
-  background: linear-gradient(90deg, #e24090 30%, #ff7cb0 100%);
-  color: #fff;
-  border-radius: 14px;
-  padding: 18px 20px;
-  margin-bottom: 18px;
-  box-shadow: 0 6px 18px -2px #ec53a966;
-  font-family: 'Poppins', sans-serif;
-  font-size: 1.09rem;
-  animation: popBanner 0.6s cubic-bezier(.62,2,.23,.92);
-  text-align: left;
-  font-weight: 500;
-}
-.discount-icon {
-  font-size: 1.8em;
-  animation: tada 1.3s infinite;
-}
-@keyframes tada {
-  0%,100% { transform: scale(1);}
-  10%,30%,50%,70%,90% { transform: scale(1.1) rotate(-5deg);}
-  20%,40%,60%,80% { transform: scale(1.1) rotate(5deg);}
-}
-@keyframes popBanner {
-  from { opacity: 0; transform: translateY(-28px) scale(.97);}
-  to   { opacity: 1; transform: translateY(0) scale(1);}
-}
-
-/* Promo main popup */
-.promo-popup {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(38,5,33,0.16);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 20000;
-  animation: fadeinPromo 0.5s;
-}
-@keyframes fadeinPromo {
-  from {opacity: 0;}
-  to {opacity: 1;}
-}
-.promo-popup-box {
-  background: linear-gradient(120deg,#fff0fa 0%, #ffd4ec 100%);
-  border-radius: 22px;
-  padding: 35px 26px 28px 26px;
-  max-width: 95vw;
-  width: 370px;
-  text-align: center;
-  box-shadow: 0 14px 42px #ec53a979, 0 2px 8px #ffb6c17c;
-  position: relative;
-  animation: popBanner 0.7s cubic-bezier(.62,2,.23,.92);
-}
-.close-promo {
-  position: absolute;
-  top: 8px;
-  right: 18px;
-  font-size: 2.1rem;
-  color: #e24090;
-  cursor: pointer;
-  font-weight: 700;
-  transition: color .19s;
-  z-index: 1;
-}
-.close-promo:hover { color: #881864; }
-.promo-deal-icon {
-  font-size: 2.9em;
-  animation: tada 2.2s infinite;
-}
-.promo-popup-box h3 {
-  font-family: 'Montserrat',sans-serif;
-  background: linear-gradient(90deg,#ec53a9,#ff7cb0);
-  color: transparent;
-  -webkit-background-clip: text;
-  background-clip: text;
-  font-size: 2.07rem;
-  font-weight: 900;
-  margin-bottom: 8px;
-  margin-top: 9px;
-  letter-spacing: .5px;
-}
-.promo-desc {
-  font-family: 'Poppins',sans-serif;
-  font-size: 1.12rem;
-  color: #ad1773;
-  margin-top: 7px;
-  font-weight: 500;
-}
-
-/* UTR POPUP MODAL */
-.utr-popup {
-  position: fixed;
-  top:0; left:0; width:100vw; height:100vh;
-  background: rgba(0,0,0,0.45);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  z-index: 10000;
-}
-.utr-popup-box {
-  background: #fff;
-  color: #e24090;
-  padding: 25px 30px;
-  border-radius: 12px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.25);
-  text-align: center;
-  font-family: 'Poppins', sans-serif;
-  font-size: 1.17rem;
-  max-width: 90vw;
-  width: 320px;
-}
-.utr-popup-box button {
-  margin-top: 20px;
-  padding: 8px 24px;
-  font-weight: 600;
-  background: #e24090;
-  color: white;
-  border: none;
-  border-radius: 7px;
-  cursor: pointer;
-  transition: background 0.25s;
-}
-.utr-popup-box button:hover {
-  background: #b61c68;
-}
-
-button.btn {
-  background: linear-gradient(45deg, #ff9a9e, #ffb6c1);
-  border: none;
-  color: white;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  background-size: 200% auto;
-}
-button.btn:hover {
-  background-position: right center;
-  box-shadow: 0 0 15px rgba(255, 182, 193, 0.6);
-}
-#overlay {
-  display: none;
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 1000;
-}
-#qrBox, #utrSection, #confirmationModal {
-  display: none;
-  position: fixed;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  background: white;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 0 25px rgba(255, 105, 180, 0.4);
-  text-align: center;
-  z-index: 1600;
-  width: 350px;
-}
- .about-section {
-  padding: 80px 20px 60px;
-  background: none
-  
-    color: #333;
-  position: relative;
-  overflow: hidden;
-}
-
-.about-box {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(10px);
-  padding: 40px 30px;
-  border-radius: 18px;
-  box-shadow: 0 8px 25px rgba(255, 105, 180, 0.3);
-  max-width: 800px;
-  margin: auto;
-  animation: fadeUp 1.5s ease-in-out;
-}
-
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.about-title {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 2rem;
-  font-weight: 800;
-  color: #e75480;
-  margin-bottom: 20px;
-  text-transform: uppercase;
-}
-
-.about-title span {
-  color: #ff1493;
-  background: linear-gradient(90deg, #ff1493, #ff7eb9, #ffc1e3);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gradientFlow 6s ease infinite;
-  background-size: 300%;
-}
-
-@keyframes gradientFlow {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-.about-text {
-  font-family: 'Poppins', sans-serif;
-  font-size: 1.05rem;
-  color: #444;
-  margin-bottom: 15px;
-  line-height: 1.7;
-}
-
-.highlight-number {
-  color: #d63384;
-  font-weight: 700;
-}
-
-/* Instagram link style */
-.insta-box img {
-  width: 28px;
-  height: 28px;
-  margin-right: 8px;
-  vertical-align: middle;
-}
-
-.insta-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-family: 'Poppins', sans-serif;
-  font-size: 1.1rem;
-  color: #fff;
-  background: linear-gradient(90deg, #ff69b4, #ff1493);
-  padding: 10px 20px;
-  border-radius: 50px;
-  text-decoration: none;
-  transition: all 0.3s ease-in-out;
-  box-shadow: 0 4px 15px rgba(255, 20, 147, 0.4);
-}
-
-.insta-link:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 20px rgba(255, 20, 147, 0.6);
-}
+body{margin:0;font-family:Inter,Arial,sans-serif;background:linear-gradient(135deg,#ff9a9e,#fad0c4,#fad0c4,#fbc2eb,#a18cd1);min-height:100vh;overflow-x:hidden}
+h1{text-align:center;color:#fff;padding:20px 10px;text-shadow:1px 1px 3px rgba(0,0,0,.4)}
+.platform-box{background:#fff;border-radius:20px;box-shadow:0 4px 12px rgba(0,0,0,.2);margin:20px auto;padding:20px;max-width:480px}
+.platform-title{display:flex;align-items:center;font-size:1.4em;font-weight:bold;margin-bottom:15px}
+.platform-title img{width:28px;height:28px;margin-right:10px}
+.service{display:flex;justify-content:space-between;align-items:center;background:#f9f9f9;border-radius:12px;padding:12px 16px;margin:8px 0;box-shadow:0 2px 6px rgba(0,0,0,.1)}
+.service span{font-size:1em;font-weight:500;color:#333}
+button{background:#0b84ff;color:#fff;border:none;border-radius:12px;padding:8px 14px;cursor:pointer;font-weight:600;transition:background .2s}
+button:hover{background:#0969c7}
+.modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);display:none;justify-content:center;align-items:center;z-index:1000}
+.modal-content{background:#fff;border-radius:16px;padding:20px;max-width:400px;width:90%;text-align:center;box-shadow:0 4px 15px rgba(0,0,0,.3);display:flex;flex-direction:column;align-items:center}
+.modal-content h2{margin-top:0;font-size:1.5em;color:#222}
+.input-field{margin:12px 0;text-align:center;width:100%}
+.input-field label{display:block;margin-bottom:6px;font-size:.9em;color:#444}
+.input-field input{width:80%;padding:10px;border-radius:10px;border:1px solid #ccc;text-align:left;margin-bottom:8px}
+.qr-code{margin:50px 0;display:flex;justify-content:center;width:100%}
+.close-btn{margin-top:15px;background:#ccc;color:#333}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#333;color:#fff;padding:10px 20px;border-radius:20px;display:none}
+.payment-logos img{margin:0 5px;vertical-align:middle}
+.big-btn{background:#28a745;padding:12px 20px;font-size:1.2em;border:none;border-radius:12px;color:#fff;margin:10px 0;cursor:pointer;transition:background .2s}
+.big-btn:hover{background:#218838}
+#qrExpiredMsg{font-weight:bold;color:#f00;margin:10px 0;}
+#reloadQRBtn{background:#0b84ff;color:#fff;padding:10px 18px;border:none;border-radius:12px;cursor:pointer;margin:10px 0;transition:background .2s}
+#reloadQRBtn:hover{background:#0969c7}
 </style>
 </head>
 <body>
+<h1>🚀 Social Media Booster Panel</h1>
 
-<!-- 20% OFF Main Screen Popup -->
-<div id="mainDiscountPopup" class="promo-popup">
-  <div class="promo-popup-box">
-    <span class="close-promo" onclick="document.getElementById('mainDiscountPopup').style.display='none'">&times;</span>
-    <div class="promo-deal-icon mb-2">??</div>
-    <h3>20% OFF MEGA DEAL</h3>
-    <div class="promo-desc">
-      Get <b>20% OFF</b> on all orders of <span style="color:#d63384;font-weight:600;">10,000+ Followers, Subscribers, or Members</span>!
-      <br>Hurry! Limited time.
-    </div>
-  </div>
-</div>
+<div id="services"></div>
 
-<header>
-  <div class="header-box">
-    <div class="header-icon mb-2">
-     
+<!-- Username Verification Modal -->
+<div class="modal" id="verifyModal">
+  <div class="modal-content">
+    <h2 id="verifyTitle">Verify</h2>
+    <div class="input-field">
+      <label id="verifyLabel" for="verifyInput"></label>
+      <input type="text" id="verifyInput" placeholder="">
     </div>
-    <h1 class="header-title">SMBOOSTER<br>PANEL</h1>
-    <div class="header-tagline">World’s Fastest Cheapest<br>SMM Services</div>
-  </div>
-  <div class="stats-container">
-    <div class="stat-card">
-      <div class="stat-number" data-target="456">0</div>
-      <div class="stat-label">Orders Today</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-number" data-target="8556">0</div>
-      <div class="stat-label">Happy Costumers</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-number" data-target="1">0</div>
-      <div class="stat-label">#1st Cheapest Panel</div>
-    </div>
-  </div>
-</header>
-<div class="app-bar container my-3">
-  <button class="app-btn selected" data-app="instagram"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" />Instagram</button>
-  <button class="app-btn" data-app="youtube"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="Youtube" />Youtube</button>
-  <button class="app-btn" data-app="telegram"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111644.png" alt="Telegram" />Telegram</button>
-  <button class="app-btn" data-app="facebook"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384053.png" alt="Facebook" />Facebook</button>
-  <button class="app-btn" data-app="tiktok"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046122.png" alt="TikTok" />TikTok</button>
-</div>
-<div id="servicesPanel">
-  <div class="container">
-    <div class="service-box">
-      <div id="discount-banner" class="discount-banner" style="display:none;">
-        <div class="d-flex align-items-center">
-          <span class="discount-icon me-2">??</span>
-          <span>
-            <strong>Special Offer!</strong><br>
-            <b>20% OFF</b> on 10,000+ Followers, Subscribers, or Members.
-          </span>
-        </div>
-      </div>
-      <div class="mb-3">
-        <label for="serviceSelect">Select Service:</label>
-        <select id="serviceSelect" class="form-select"></select>
-      </div>
-      <h5 id="serviceTitle"></h5>
-      <p id="serviceDesc"></p>
-      <div class="mb-3">
-        <label id="usernameLabel"></label>
-        <input type="text" id="usernameInput" class="form-control" placeholder="" />
-      </div>
-      <div class="mb-3" id="qtyGroup">
-        <label for="qtyInput">Enter Quantity (Minimum 1000):</label>
-        <input type="number" id="qtyInput" class="form-control" min="1000" value="1000" />
-      </div>
-      <div class="mb-3">
-        <label>Total Price:</label>
-        <input type="text" id="priceBox" class="form-control" readonly placeholder="0.00" />
-      </div>
-      <button class="btn btn-primary w-100" id="makeOrder">Make Order </button>
-    </div>
-  </div>
-</div>
-<div id="overlay"></div>
-<div id="qrBox">
-  <h5>Scan to Pay via UPI</h5>
-  <div id="qrcode"></div>
-  <p id="amountText" class="mt-2"></p>
-  <button class="btn btn-secondary w-100" id="closeQr">Close</button>
-  <button class="btn btn-success w-100 mt-2" id="paidBtn">I have paid</button>
-</div>
-<div id="utrSection">
-  <label for="utrInput">Enter Payment UTR Number:</label>
-  <input type="text" id="utrInput" class="form-control"
-         placeholder="Enter your UTR number" maxlength="22"
-         autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
-  <button class="btn btn-success w-100 mt-3" id="verifyUtrBtn">Verify UTR</button>
-</div>
-<div id="utrVerifiedPopup" class="utr-popup" style="display:none;">
-  <div class="utr-popup-box">
-    <p>UTR Verified Successfully!</p>
-    <button onclick="closeUtrPopup('utrVerifiedPopup')">OK</button>
-  </div>
-</div>
-<div id="paymentErrorPopup" class="utr-popup" style="display:none;">
-  <div class="utr-popup-box">
-    <p>Payment Not Completed! Please check your UTR number.</p>
-    <button onclick="closeUtrPopup('paymentErrorPopup')">Close</button>
+    <button onclick="verifyUser()">Verify</button>
+    <button class="close-btn" onclick="closeModal('verifyModal')">Cancel</button>
   </div>
 </div>
 
-<!-- About Us Section -->
-<section id="about" class="about-section">
-  <div class="container text-center">
-    <div class="about-box">
-      <h2 class="about-title">About <span>SMBOOSTER</span></h2>
-      <p class="about-text">
-        SMBOOSTER was founded with one simple goal: to boost social media faster, affordable, 
-        and effortless. Serving thousands of happy costumers worldwide, we offer authentic engagement 
-        across all major platforms — helping influencers, brands, and creators build real digital impact. 
-      </p>
+<!-- QR Modal with More Payment App Icons -->
+<div class="modal" id="qrModal">
+  <div class="modal-content" style="max-width:400px;align-items:center;">
+    <h2>Scan to Pay via any UPI apps </h2>
+    <div class="payment-logos" style="margin:10px 0;">
+     <div class="payment-logos" style="margin:0px 0; display:flex; justify-content:center; flex-wrap:wrap; gap:8px;">
+  
+</div>
 
-      <p class="about-text">
-        Trusted by over <span class="highlight-number">5000+</span> happy costumers, our mission is simple — 
-        deliver quality, speed, and value like no one else.
-      </p>
-
-      <div class="insta-box mt-4">
-        <a href="https://www.instagram.com/s_m_b_ooster_guru?igsh=ZzZvYjE1Nzk4ZDJn" target="_blank" class="insta-link">
-          <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" />
-          @SMBOOSTER
-        </a>
-      </div>
     </div>
+
+    <div class="qr-code" style="margin:5px 0;">
+      <canvas id="qrcode" style="width:400px;height:400px;"></canvas>
+    </div>
+    <div id="amountDisplay" style="font-size:1.6em;font-weight:bold;margin:10px 0;"></div>
+    <div style="margin-bottom:15px;"></div>
+
+    <!-- Countdown -->
+    <div id="countdown" style="margin:10px 0;font-size:1.2em;color:#f00;"></div>
+
+    <!-- UTR Input -->
+    <div class="input-field" id="utrField">
+      <label for="utrInput">Enter your Payment UTR/TXN ID</label>
+      <input type="text" id="utrInput" placeholder="Enter full UTR">
+    </div>
+
+    <!-- Big Green Payment Complete Button -->
+    <button class="big-btn" onclick="verifyUTR()" style="margin-top:10px;">✅ Payment Completed</button>
+
+    <div id="qrExpiredMsg" style="display:none;font-weight:bold;color:#f00;margin:10px 0;">⚠️ QR expired, please reload</div>
+    <button id="reloadQRBtn" style="display:none;">🔁 Reload QR Code</button>
+    <button class="close-btn" onclick="closeModal('qrModal')">Cancel</button>
   </div>
-</section>
+</div>
+<!-- Payment Not Completed Modal -->
+<div class="modal" id="paymentFailModal">
+  <div class="modal-content">
+    <h2>Payment not completed ❌</h2>
+    <p>Please try again.</p>
+    <button onclick="backToQR()">Back to QR</button>
+  </div>
+</div>
+
+<!-- Payment Success Modal -->
+<div class="modal" id="paymentSuccessModal">
+  <div class="modal-content">
+    <h2>✅ Payment Verified!</h2>
+    <p id="successService"></p>
+    <p id="successUserInput"></p>
+    <p>Your service will be provided soon!</p>
+    <button class="big-btn" onclick="closeModal('paymentSuccessModal')">OK</button>
+  </div>
+</div>
+
+<div class="toast" id="toast">Verified successfully ✅</div>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
 <script>
-  // Hide main discount popup after 9 seconds
-  window.addEventListener("DOMContentLoaded", function(){
-    setTimeout(function(){
-      const popup = document.getElementById('mainDiscountPopup');
-      if(popup) popup.style.display = 'none';
-    }, 9000);
+const UPI_ID = 'socialmediaboosterr@axl';
+const MERCHANT_NAME = 'Social Media Booster';
+// Multiple valid UTR prefixes
+const UTR_PREFIXES = ["FMPI","ok","T","UTR","utr"];
+
+const SERVICES = [
+  {platform:'Instagram',icon:'https://cdn-icons-png.flaticon.com/512/174/174855.png',items:[
+    {name:'Instagram 1k Followers',price:10,verifyField:{label:'Enter Instagram username',placeholder:'@username'}},
+    {name:'Instagram 10k Followers',price:89,verifyField:{label:'Enter Instagram username',placeholder:'@username'}},
+	 {name:'Instagram Permanent blue tick ☑️',price:99,verifyField:{label:'Enter Instagram username',placeholder:'@username'}},
+    {name:'Instagram 5k Likes',price:19,verifyField:{label:'Enter Post/Reel link',placeholder:'Paste link here'}},
+    {name:'Instagram 10k Reels Views',price:39,verifyField:{label:'Enter Reel link',placeholder:'Paste reel link'}}
+  ]},
+  {platform:'YouTube',icon:'https://cdn-icons-png.flaticon.com/512/1384/1384060.png',items:[
+    {name:'YouTube 1k Subscribers',price:49,verifyField:{label:'Enter Channel name',placeholder:'Channel name'}},
+    {name:'YouTube 10k Subscribers',price:449,verifyField:{label:'Enter Channel URL',placeholder:'Paste channel URL'}},
+    {name:'YouTube 5k Video Views',price:299,verifyField:{label:'Enter Video URL',placeholder:'Paste video link'}},
+    {name:'YouTube 10k Shorts Views',price:149,verifyField:{label:'Enter Shorts link',placeholder:'Paste shorts link'}},
+    {name:'YouTube 4000H Watchtime',price:999,verifyField:{label:'Enter Channel URL',placeholder:'Paste channel URL'}}
+  ]},
+  {platform:'Facebook',icon:'https://cdn-icons-png.flaticon.com/512/733/733547.png',items:[
+    {name:'Facebook 1k Followers',price:19,verifyField:{label:'Enter Facebook profile/page link',placeholder:'Paste profile or page link'}},
+    {name:'Facebook 10k Followers',price:189,verifyField:{label:'Enter Facebook page/profile link',placeholder:'Paste profile/page link'}},
+    {name:'Facebook 10k Reels Views',price:49,verifyField:{label:'Enter Reel link',placeholder:'Paste reel link'}},
+    {name:'Facebook 5k Reels Likes',price:29,verifyField:{label:'Enter Reel link',placeholder:'Paste reel link'}}
+  ]}
+];
+
+let currentService = null;
+let timerInterval;
+
+function renderServices(){
+  const container=document.getElementById('services');
+  SERVICES.forEach(group=>{
+    const box=document.createElement('div');
+    box.className='platform-box';
+    box.innerHTML=`<div class='platform-title'><img src="${group.icon}"/> ${group.platform}</div>`;
+    group.items.forEach(s=>{
+      const row=document.createElement('div');
+      row.className='service';
+      row.innerHTML=`<span>${s.name} — ₹${s.price}</span><button onclick='openVerify(${JSON.stringify(s)})'>Buy</button>`;
+      box.appendChild(row);
+    });
+    container.appendChild(box);
   });
+}
 
-  // Counter Animation
-  const counters = document.querySelectorAll(".stat-number");
-  const speed = 100;
-  counters.forEach(counter => {
-    const animate = () => {
-      const value = +counter.getAttribute("data-target");
-      const data = +counter.innerText;
-      const increment = value / 80;
-      if (data < value) {
-        counter.innerText = Math.ceil(data + increment);
-        setTimeout(animate, speed);
-      } else {
-        counter.innerText = value + "+";
-      }
-    };
-    animate();
-  });
+function openVerify(service){
+  currentService=service;
+  document.getElementById('verifyTitle').innerText=`Verify ${service.name}`;
+  document.getElementById('verifyLabel').innerText=service.verifyField.label;
+  document.getElementById('verifyInput').placeholder=service.verifyField.placeholder;
+  document.getElementById('verifyInput').value='';
+  document.getElementById('verifyInput').focus();
+  document.getElementById('verifyModal').style.display='flex';
+}
 
-  // UTR Popup Control
-  const verifyUtrBtn = document.getElementById("verifyUtrBtn");
-  const utrInput = document.getElementById("utrInput");
-  const utrVerifiedPopup = document.getElementById("utrVerifiedPopup");
-  const paymentErrorPopup = document.getElementById("paymentErrorPopup");
+function closeModal(id){document.getElementById(id).style.display='none'}
 
-  verifyUtrBtn.addEventListener("click", () => {
-    const utr = utrInput.value.trim();
-    if (!utr) {
-      alert("Please enter your UTR number.");
-      return;
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.innerText=msg;t.style.display='block';
+  setTimeout(()=>{t.style.display='none'},2000);
+}
+
+function verifyUser(){
+  const input=document.getElementById('verifyInput').value.trim();
+  if(!input){alert('Please fill the required field');return;}
+  closeModal('verifyModal');
+  showToast('Verified successfully ✅');
+  setTimeout(openQR,500);
+}
+
+function openQR(){
+  const amount=currentService.price;
+  document.getElementById('amountDisplay').innerText = `Amount ₹${amount}`;
+  const upiUrl=`upi://pay?pa=${UPI_ID}&pn=${MERCHANT_NAME}&am=${amount}&cu=INR`;
+  const canvas = document.getElementById('qrcode');
+  canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+  QRCode.toCanvas(canvas, upiUrl, {width:220, height:220}, err=>{if(err)console.error(err)});
+
+  document.getElementById('qrExpiredMsg').style.display='none';
+  document.getElementById('reloadQRBtn').style.display='none';
+  document.getElementById('qrcode').style.display='flex';
+  document.getElementById('utrInput').value='';
+
+  document.getElementById('qrModal').style.display='flex';
+  startCountdown(5*60);
+}
+
+function startCountdown(seconds){
+  clearInterval(timerInterval);
+  let remaining=seconds;
+  const countdownEl = document.getElementById('countdown');
+  countdownEl.innerText = formatTime(remaining);
+
+  timerInterval = setInterval(()=>{
+    remaining--;
+    countdownEl.innerText = formatTime(remaining);
+    if(remaining <= 0){
+      clearInterval(timerInterval);
+      countdownEl.innerText = '';
+      document.getElementById('qrcode').style.display='none';
+      document.getElementById('qrExpiredMsg').style.display='block';
+      document.getElementById('reloadQRBtn').style.display='inline-block';
     }
-    // Always show payment error popup for demonstration
-    paymentErrorPopup.style.display = "flex";
-  });
+  },1000);
+}
 
-  function closeUtrPopup(id) {
-    const popup = document.getElementById(id);
-    popup.style.display = "none";
-    utrInput.focus();
+function formatTime(sec){
+  const m = String(Math.floor(sec/60)).padStart(2,'0');
+  const s = String(sec%60).padStart(2,'0');
+  return `⏱️ ${m}:${s}`;
+}
+
+document.getElementById('reloadQRBtn').onclick = function(){ openQR(); };
+
+function paymentNotCompleted(){
+  closeModal('qrModal');
+  document.getElementById('paymentFailModal').style.display='flex';
+}
+
+function backToQR(){
+  closeModal('paymentFailModal');
+  openQR();
+}
+
+// UTR verification with multiple prefixes
+function verifyUTR(){
+  const userUTR = document.getElementById('utrInput').value.trim().toUpperCase();
+  if(!userUTR){
+    alert('Please enter your UTR.');
+    return;
   }
 
-  document.querySelectorAll('.app-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
-      document.querySelector('.app-btn.selected')?.classList.remove('selected');
-      btn.classList.add('selected');
-      const app = btn.getAttribute('data-app');
-      if(services[app]) {
-        loadServices(app);
-        serviceSelect.value = 0;
-        setServiceInfo(app, 0);
-      } else {
-        document.querySelector('.service-box').style.display = "none";
-      }
-      document.querySelector('.service-box').style.display = ""; // show by default
-    });
-  });
+  const firstFour = userUTR.substring(0,4);
+  if(UTR_PREFIXES.includes(firstFour)){
+    closeModal('qrModal'); // close QR modal
 
-  document.addEventListener("DOMContentLoaded", () => {
-    window.services = {
-      instagram: [
-        { name: "Followers", desc: "Get real Instagram followers instantly.", placeholder: "Enter Instagram Username", base: 10 },
-        { name: "post Likes", desc: "Instant high-quality likes for your posts.", placeholder: "Enter Post Link", base: 5 },
-        { name: "post Comments", desc: "Real and engaging comments on your post.", placeholder: "Enter post Link", base: 8 },
-        { name: "Reel Likes", desc: "Instant high-quality likes for your Reel.", placeholder: "Enter Reel Link", base: 5 },
-        { name: "Reels Views", desc: "Real organic views for your videos.", placeholder: "Enter Reel Link", base: 4 },
-        { name: "Reels Comments", desc: "Real and engaging comments on your Reels.", placeholder: "Enter ReelLink", base: 8 }
-      ],
-      youtube: [
-        { name: "Subscribers", desc: "Grow your YouTube channel subscribers fast.", placeholder: "Enter Channel Link", base: 49 },
-        { name: "4000 Hrs Watchtime", desc: "Get monitized by organic watchtime safely.", placeholder: "Enter Channel Link", base: 1199, noQty: true },
-        { name: "Shorts Views", desc: "Instant views for YouTube Shorts.", placeholder: "Enter Shorts Link", base: 8 },
-        { name: "Short Comments", desc: "Get real user comments on your videos.", placeholder: "Enter Short Link", base: 10 },
-        { name: "video Views", desc: "Instant views but views don't give Watchtime.", placeholder: "Enter video Link", base: 8 },
-        { name: "Video Comments", desc: "Get real user comments on your videos.", placeholder: "Enter Video Link", base: 10 }
-      ],
-      telegram: [
-        { name: "Members", desc: "Add Telegram members quickly.", placeholder: "Enter Group Link", base: 39 },
-        { name: "Premium Members", desc: "Add premium Telegram members quickly.", placeholder: "Enter Group Link", base: 59 },
-        { name: "Post Views", desc: "Increase Telegram post views instantly.", placeholder: "Enter Post Link", base: 4 }
-      ],
-      facebook: [
-        { name: "Followers", desc: "Grow your page followers easily.", placeholder: "Enter Page Link", base: 15 },
-        { name: "post Likes", desc: "Get page or post likes from real users.", placeholder: "Enter Post Link", base: 7 },
-        { name: "post Comments", desc: "Real and engaging comments on your post.", placeholder: "Enter post Link", base: 9 },
-        { name: "Reel Likes", desc: "Boost likes on your Facebook Reels.", placeholder: "Enter Reel Link", base: 5 },
-        { name: "Reels Views", desc: "Real organic views for your Reels.", placeholder: "Enter Reel Link", base: 4 },
-        { name: "Reels Comments", desc: "Real and engaging comments on your Facebook Reels.", placeholder: "Enter ReelLink", base: 8 }
-      ],
-      tiktok: [
-        { name: "Followers", desc: "Real and fast TikTok followers.", placeholder: "Enter TikTok Username", base: 26 },
-        { name: "Likes", desc: "High-quality likes for your TikTok videos.", placeholder: "Enter Video Link", base: 5 },
-        { name: "Comments", desc: "Engaging comments for TikTok posts.", placeholder: "Enter Video/Post Link", base: 8 },
-        { name: "Video Views", desc: "Boost your TikTok video views globally.", placeholder: "Enter Video Link", base: 3 }
-      ]
-    };
-    const serviceSelect = document.getElementById("serviceSelect");
-    const title = document.getElementById("serviceTitle");
-    const desc = document.getElementById("serviceDesc");
-    const userLabel = document.getElementById("usernameLabel");
-    const userInput = document.getElementById("usernameInput");
-    const qtyInput = document.getElementById("qtyInput");
-    const priceBox = document.getElementById("priceBox");
-    const makeOrderBtn = document.getElementById("makeOrder");
-    const overlay = document.getElementById("overlay");
-    const qrBox = document.getElementById("qrBox");
-    const qrcodeDiv = document.getElementById("qrcode");
-    const amountText = document.getElementById("amountText");
-    const closeQrBtn = document.getElementById("closeQr");
-    const paidBtn = document.getElementById("paidBtn");
-    const utrSection = document.getElementById("utrSection");
-    const utrInput = document.getElementById("utrInput");
-    const verifyUtrBtn = document.getElementById("verifyUtrBtn");
-    const confirmationModal = document.getElementById("confirmationModal");
-    const confServiceDetails = document.getElementById("confServiceDetails");
-    const closeConfirmBtn = document.getElementById("closeConfirm");
+    // Show success modal
+    document.getElementById('successService').innerText = `Service: ${currentService.name}`;
+    const userInput = document.getElementById('verifyInput').value.trim();
+    document.getElementById('successUserInput').innerText = `Your input: ${userInput}`;
 
-    window.loadServices = function(app) {
-      serviceSelect.innerHTML = "";
-      (services[app] || []).forEach((s, i) => {
-        const option = document.createElement("option");
-        option.value = i;
-        option.textContent = s.name;
-        serviceSelect.appendChild(option);
-      });
-    };
+    document.getElementById('paymentSuccessModal').style.display='flex';
+  } else {
+    alert('Payment not completed ❌Wrong UTR');
+    document.getElementById('utrInput').value='';
+  }
+}
 
-    window.setServiceInfo = function(app, idx) {
-      if (!services[app]) return;
-      const serv = services[app][idx];
-      title.textContent = `${app.charAt(0).toUpperCase() + app.slice(1)} - ${serv.name}`;
-      desc.textContent = serv.desc;
-      userLabel.textContent = serv.placeholder + ":";
-      userInput.placeholder = serv.placeholder;
-
-      if (serv.noQty) {
-        qtyInput.parentElement.style.display = "none";
-        document.querySelector('label[for="qtyInput"]').nextElementSibling.style.display = "none";
-        if (!document.getElementById("monetizationNotice")) {
-          const notice = document.createElement("div");
-          notice.id = "monetizationNotice";
-          notice.style =
-            "color:#d63384;font-weight:600;background:#f9c9ed;padding:13px 15px;margin:12px 0 0 0;border-radius:9px;";
-          notice.textContent = "Channel will be monetized in 24hrs. Quantity is handled automatically!";
-          desc.parentNode.insertBefore(notice, desc.nextSibling);
-        } else {
-          document.getElementById("monetizationNotice").style.display = "block";
-        }
-        qtyInput.value = 1;
-      } else {
-        qtyInput.parentElement.style.display = "";
-        document.querySelector('label[for="qtyInput"]').nextElementSibling.style.display = "";
-        if (document.getElementById("monetizationNotice")) {
-          document.getElementById("monetizationNotice").style.display = "none";
-        }
-        let minQty = 5000;
-        const special = ["followers", "subscribers", "members"];
-        if (special.some((type) => serv.name.toLowerCase().includes(type))) minQty = 1000;
-        qtyInput.min = minQty;
-        qtyInput.value = minQty;
-        document.querySelector('label[for="qtyInput"]').textContent = `Enter Quantity (Minimum ${minQty}):`;
-      }
-      updatePrice();
-    };
-
-    function updatePrice() {
-      const currentApp = document.querySelector('.app-btn.selected')?.getAttribute('data-app') || "instagram";
-      const idx = serviceSelect.value || 0;
-      const servs = services[currentApp];
-      if (!servs) return;
-      const serv = servs[idx];
-
-      if (serv.noQty) {
-        priceBox.value = `?${serv.base.toFixed(2)}`;
-        let banner = document.getElementById("discount-banner");
-        if (banner) banner.style.display = "none";
-        return;
-      }
-
-      const qty = Math.max(Number(qtyInput.min), parseInt(qtyInput.value) || Number(qtyInput.min));
-      let price = (qty / 1000) * serv.base;
-
-      let banner = document.getElementById("discount-banner");
-      if (
-        qty >= 10000 &&
-        ["followers", "subscribers", "members"].some((w) => serv.name.toLowerCase().includes(w))
-      ) {
-        price = price * 0.8;
-        if (banner) banner.style.display = "block";
-      } else if (banner) {
-        banner.style.display = "none";
-      }
-
-      priceBox.value = `?${price.toFixed(2)}`;
-    }
-
-    loadServices("instagram");
-    serviceSelect.value = 0;
-    setServiceInfo("instagram", 0);
-    serviceSelect.addEventListener("change", function () {
-      const currentApp = document.querySelector(".app-btn.selected")?.getAttribute("data-app") || "instagram";
-      setServiceInfo(currentApp, serviceSelect.value);
-    });
-    qtyInput.addEventListener("input", updatePrice);
-    makeOrderBtn.addEventListener("click", () => {
-      const currentApp = document.querySelector(".app-btn.selected")?.getAttribute("data-app") || "instagram";
-      const idx = serviceSelect.value || 0;
-      const servs = services[currentApp];
-      if (!servs) return;
-      const serv = servs[idx];
-      const username = userInput.value.trim();
-      let qty = 1;
-      if (!serv.noQty) qty = Math.max(Number(qtyInput.min), parseInt(qtyInput.value) || Number(qtyInput.min));
-      let price = (qty / 1000) * serv.base;
-      if (
-        !serv.noQty &&
-        qty >= 10000 &&
-        ["followers", "subscribers", "members"].some((w) => serv.name.toLowerCase().includes(w))
-      )
-        price = price * 0.8;
-      if (!username) {
-        alert("Please enter required details!");
-        return;
-      }
-      const upiUrl = `upi://pay?pa=smsainibooster@fam&pn=SMBOOSTER&am=${price.toFixed(2)}&cu=INR&tn=${encodeURIComponent(
-        serv.name + " for " + username
-      )}`;
-      qrcodeDiv.innerHTML = "";
-      new QRCode(qrcodeDiv, { text: upiUrl, width: 230, height: 230, correctLevel: QRCode.CorrectLevel.H });
-      amountText.textContent = `Pay ?${price.toFixed(2)} for ${qty} ${serv.name}`;
-      overlay.style.display = "block";
-      qrBox.style.display = "block";
-    });
-    closeQrBtn.addEventListener("click", () => {
-      qrBox.style.display = "none";
-      overlay.style.display = "none";
-    });
-    paidBtn.addEventListener("click", () => {
-      qrBox.style.display = "none";
-      utrSection.style.display = "block";
-      overlay.style.display = "block";
-    });
-    overlay.addEventListener("click", () => {
-      utrSection.style.display = "none";
-      confirmationModal.style.display = "none";
-      overlay.style.display = "none";
-    });
-    verifyUtrBtn.addEventListener("click", () => {
-      const utr = utrInput.value.trim();
-      if (!utr) {
-        alert("Please enter your UTR number.");
-        return;
-      }
-      paymentErrorPopup.style.display = "flex";
-    });
-    function closeUtrPopup(id) {
-      const popup = document.getElementById(id);
-      popup.style.display = "none";
-      utrInput.focus();
-    }
-    closeConfirmBtn.addEventListener("click", () => {
-      confirmationModal.style.display = "none";
-      overlay.style.display = "none";
-    });
-  });
-
+renderServices();
 </script>
 </body>
 </html>
